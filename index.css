@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+/* PP Editorial New Font Faces - with local() fallback for Safari */
+@font-face {
+  font-family: 'PP Editorial New';
+  src: local('PP Editorial New'),
+       local('PPEditorialNew-Regular'),
+       url('/fonts/pp-editorial-new-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: local('PP Editorial New Italic'),
+       local('PPEditorialNew-Italic'),
+       url('/fonts/pp-editorial-new-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: local('PP Editorial New Bold'),
+       local('PPEditorialNew-Bold'),
+       url('/fonts/pp-editorial-new-ultrabold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: local('PP Editorial New Bold Italic'),
+       local('PPEditorialNew-BoldItalic'),
+       url('/fonts/pp-editorial-new-ultrabold-italic.woff2') format('woff2');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: local('PP Editorial New Ultralight'),
+       local('PPEditorialNew-Ultralight'),
+       url('/fonts/pp-editorial-new-ultralight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: local('PP Editorial New Ultralight Italic'),
+       local('PPEditorialNew-UltralightItalic'),
+       url('/fonts/pp-editorial-new-ultralight-italic.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: local('PP Editorial New Thin'),
+       local('PPEditorialNew-Thin'),
+       url('/fonts/pp-editorial-new-thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: local('PP Editorial New Thin Italic'),
+       local('PPEditorialNew-ThinItalic'),
+       url('/fonts/pp-editorial-new-thin-italic.woff2') format('woff2');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+body {
+  background-color: #030303;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Section container - consistent max-width and centering */
+.section-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+h1, h2, h3, h4, .serif {
+  font-family: 'PP Editorial New', 'Georgia', 'Times New Roman', serif;
+}
+
+h1, h2 {
+  font-weight: 100;
+}
+
+/* Subhead style - small uppercase text above headlines */
+.subhead {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(161 161 170); /* zinc-400 */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 4px;
+}
+
+/* Gradient Text Style with Multiple Shadows and White Overlay */
+.gradient-text-hero {
+  background: 
+    /* White fill overlay on top (0.1 alpha) */
+    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    /* 6-stop gradient underneath */
+    linear-gradient(
+      to bottom right,
+      rgba(132, 59, 100, 1) 0%,
+      rgba(83, 116, 210, 1) 24.04%,
+      rgba(102, 179, 210, 1) 42.79%,
+      rgba(219, 190, 133, 1) 61.06%,
+      rgba(149, 186, 188, 1) 80.53%,
+      rgba(162, 228, 255, 1) 100%
+    );
+  background-size: 100% 100%, 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  text-shadow: 
+    rgba(255, 255, 255, 0.1) 0px 0px 1px;
+  animation: text-gradient-shift 8s ease-in-out infinite;
+}
+
+@keyframes text-gradient-shift {
+  0%, 100% {
+    background-position: 0% 0%, 0% 0%;
+  }
+  25% {
+    background-position: 0% 0%, 50% 25%;
+  }
+  50% {
+    background-position: 0% 0%, 100% 50%;
+  }
+  75% {
+    background-position: 0% 0%, 50% 75%;
+  }
+}
+
+/* CTA Gradient Button - Frosted glass over spectrum gradient */
+.cta-gradient {
+  position: relative;
+  border: 1px solid rgba(77,148,109,0.28);
+  border-radius: 8px;
+  box-shadow: inset 0 0 4px rgba(255,255,255,0.5);
+  overflow: hidden;
+  background: #111;
+  transition: box-shadow 0.2s ease-out;
+}
+
+.cta-gradient:hover {
+  box-shadow: inset 0 0 4px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3);
+}
+
+/* Gradient layer */
+.cta-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(132,59,100,1) 0%, 
+    rgba(108,88,155,1) 12%, 
+    rgba(83,116,210,1) 24%, 
+    rgba(102,179,210,1) 43%,
+    rgba(161,185,172,1) 52%,
+    rgba(219,190,133,1) 61%, 
+    rgba(149,186,188,1) 80%,
+    rgba(162,228,255,1) 100%
+  );
+  z-index: 0;
+  animation: hue-shift 2s linear infinite;
+  animation-play-state: paused;
+}
+
+.cta-gradient:hover::after {
+  animation-play-state: running;
+}
+
+@keyframes hue-shift {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Dark overlay with blur */
+.cta-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0px;
+  background: rgba(0,0,0,.98);
+  filter: blur(6px);
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.cta-gradient span {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-gradient:hover span {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    linear-gradient(
+      to bottom right,
+      rgba(132, 59, 100, 1) 0%,
+      rgba(83, 116, 210, 1) 24.04%,
+      rgba(102, 179, 210, 1) 42.79%,
+      rgba(219, 190, 133, 1) 61.06%,
+      rgba(149, 186, 188, 1) 80.53%,
+      rgba(162, 228, 255, 1) 100%
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+

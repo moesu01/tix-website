@@ -185,9 +185,44 @@ const ScreenQuad: React.FC<ShaderControlProps> = ({
   );
 };
 
+// Glow filter style - uses drop-shadow to follow the SVG shape
+const glowFilterStyle: React.CSSProperties = {
+  filter: `
+    drop-shadow(0 0 40px rgba(0, 0, 0, 0.4))
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))
+    drop-shadow(0 0 12px #B6D4FF)
+    drop-shadow(0 0 30px #B6D4FF)
+    drop-shadow(0 0 50px rgba(255, 255, 255, 0.6))
+    drop-shadow(0 0 80px rgba(255, 255, 255, 0.4))
+  `,
+}
+
+const svgContainerStyle: React.CSSProperties = {
+  background: `
+    radial-gradient(
+      80% 380% at 10% 32%,
+      rgba(132, 59, 100, 0.2) 0%,
+      rgba(83, 116, 210, 0.2) 24%,
+      rgba(102, 179, 210, 0.2) 43%,
+      rgba(219, 190, 133, 0.2) 61%,
+      rgba(149, 186, 188, 0.2) 81%,
+      rgba(162, 228, 255, 0.2) 100%
+    ),
+    #FFFFFF
+  `,
+  WebkitMaskImage: 'url(/tix.svg)',
+  WebkitMaskRepeat: 'no-repeat',
+  WebkitMaskPosition: 'center',
+  WebkitMaskSize: 'contain',
+  maskImage: 'url(/tix.svg)',
+  maskRepeat: 'no-repeat',
+  maskPosition: 'center',
+  maskSize: 'contain',
+}
+
 export const HeroShader: React.FC<ShaderControlProps & { className?: string }> = ({ className, ...props }) => {
   return (
-    <div className={className || 'w-full h-full'}>
+    <div className={`${className || 'w-full h-full'} relative`}>
       <Canvas
         dpr={[1, 2]}
         gl={{ 
@@ -198,6 +233,24 @@ export const HeroShader: React.FC<ShaderControlProps & { className?: string }> =
       >
         <ScreenQuad {...props} />
       </Canvas>
+
+      {/* Logo overlay - centered absolutely */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {/* Glow wrapper - applies drop-shadow filter that follows the SVG shape */}
+        {/* SVG ratio is 161:175 (w:h), 120px on mobile, 180px on desktop */}
+        <div 
+          className="h-[120px] w-[110px] md:h-[180px] md:w-[165px]"
+          style={glowFilterStyle}
+        >
+          {/* SVG container - applies background gradient as fill via mask */}
+          <div 
+            className="w-full h-full"
+            style={svgContainerStyle}
+            aria-label="TIX Logo"
+            role="img"
+          />
+        </div>
+      </div>
     </div>
   );
 };
