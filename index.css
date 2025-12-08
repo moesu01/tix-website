@@ -116,9 +116,10 @@ h1, h2 {
 /* Subhead style - small uppercase text above headlines */
 .subhead {
   font-size: 0.75rem;
+  font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgb(161 161 170); /* zinc-400 */
+  color: rgba(255, 255, 255, 0.85); /* zinc-400 */
 }
 
 /* Custom Scrollbar */
@@ -156,7 +157,32 @@ h1, h2 {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
   text-shadow: 
-    rgba(255, 255, 255, 0.1) 0px 0px 1px;
+    rgba(255, 255, 255, 0.1) 0px 0px 2px;
+  animation: text-gradient-shift 8s ease-in-out infinite;
+}
+
+/* Gradient Text for Body - same as hero but without text-stroke */
+.gradient-text-body {
+  background: 
+    /* White fill overlay on top (0.1 alpha) */
+    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    /* 6-stop gradient underneath */
+    linear-gradient(
+      to bottom right,
+      rgba(132, 59, 100, 1) 0%,
+      rgba(83, 116, 210, 1) 24.04%,
+      rgba(102, 179, 210, 1) 42.79%,
+      rgba(219, 190, 133, 1) 61.06%,
+      rgba(149, 186, 188, 1) 80.53%,
+      rgba(162, 228, 255, 1) 100%
+    );
+  background-size: 100% 100%, 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 
+  rgba(255, 255, 255, .5) 0px 0px 1px;
+
   animation: text-gradient-shift 8s ease-in-out infinite;
 }
 
@@ -175,48 +201,86 @@ h1, h2 {
   }
 }
 
+/* Gradient Border - uses same colors as gradient-text-hero */
+.gradient-border {
+  position: relative;
+  background: transparent;
+  border: none;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    linear-gradient(
+      to bottom right,
+      rgba(132, 59, 100, 0.6) 0%,
+      rgba(83, 116, 210, 0.6) 24.04%,
+      rgba(102, 179, 210, 0.6) 42.79%,
+      rgba(219, 190, 133, 0.6) 61.06%,
+      rgba(149, 186, 188, 0.6) 80.53%,
+      rgba(162, 228, 255, 0.6) 100%
+    );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
 /* CTA Gradient Button - Frosted glass over spectrum gradient */
 .cta-gradient {
   position: relative;
   border: 1px solid rgba(77,148,109,0.28);
-  border-radius: 8px;
-  box-shadow: inset 0 0 4px rgba(255,255,255,0.5);
+  border-radius: 12px;
+  box-shadow: inset 0 0 4px rgba(255,255,255,1);
   overflow: hidden;
   background: #111;
-  transition: box-shadow 0.2s ease-out;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
 .cta-gradient:hover {
-  box-shadow: inset 0 0 4px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3);
+  transform: scale(1.05);
 }
 
-/* Gradient layer */
+/* Gradient layer - always animating */
 .cta-gradient::after {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, 
-    rgba(132,59,100,1) 0%, 
+    rgb(255, 114, 194) 0%, 
     rgba(108,88,155,1) 12%, 
     rgba(83,116,210,1) 24%, 
     rgba(102,179,210,1) 43%,
-    rgba(161,185,172,1) 52%,
-    rgba(219,190,133,1) 61%, 
-    rgba(149,186,188,1) 80%,
+    rgb(221, 255, 237) 52%,
+    rgb(255, 221, 152) 61%, 
+    rgba(247,208,226,1) 80%,
     rgba(162,228,255,1) 100%
   );
+  background-size: 200% 200%;
   z-index: 0;
-  animation: hue-shift 2s linear infinite;
-  animation-play-state: paused;
+  animation: cta-gradient-shift 6s ease-in-out infinite;
 }
 
-.cta-gradient:hover::after {
-  animation-play-state: running;
-}
-
-@keyframes hue-shift {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+@keyframes cta-gradient-shift {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 50% 25%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 75%;
+  }
 }
 
 /* Dark overlay with blur */
@@ -224,9 +288,9 @@ h1, h2 {
   content: '';
   position: absolute;
   inset: 0px;
-  background: rgba(0,0,0,.98);
-  filter: blur(6px);
-  border-radius: inherit;
+  background: #111;
+  filter: blur(7px);
+  border-radius: 16px;
   z-index: 1;
 }
 
@@ -235,20 +299,27 @@ h1, h2 {
   z-index: 2;
 }
 
-.cta-gradient:hover span {
-  background: 
-    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
-    linear-gradient(
-      to bottom right,
-      rgba(132, 59, 100, 1) 0%,
-      rgba(83, 116, 210, 1) 24.04%,
-      rgba(102, 179, 210, 1) 42.79%,
-      rgba(219, 190, 133, 1) 61.06%,
-      rgba(149, 186, 188, 1) 80.53%,
-      rgba(162, 228, 255, 1) 100%
-    );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Glow element for CTA - sits behind button */
+.cta-glow {
+  position: absolute;
+  inset: -1px; /* Extend beyond button edges */
+  border-radius: 12px;
+  overflow: visible;
+  background: linear-gradient(135deg, 
+    rgb(255, 114, 194) 0%, 
+    rgba(108,88,155,1) 12%, 
+    rgba(83,116,210,1) 24%, 
+    rgba(102,179,210,1) 43%,
+    rgb(221, 255, 237) 52%,
+    rgb(255, 221, 152) 61%, 
+    rgba(247,208,226,1) 80%,
+    rgba(162,228,255,1) 100%
+  );
+  background-size: 100% 100%;
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: cta-gradient-shift 6s ease-in-out infinite;
+  pointer-events: none;
 }
 

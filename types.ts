@@ -7,6 +7,9 @@ export interface ShaderControlProps {
   iterations: number;
   interactionMin: number;
   interactionMax: number;
+  brightness: number;  // Default: 1.0 (0.5-1.5 range recommended)
+  contrast: number;    // Default: 1.0 (0.5-1.5 range recommended)
+  saturation: number;  // Default: 1.0 (0.0-2.0 range recommended)
 }
 
 export interface PartnerLogo {

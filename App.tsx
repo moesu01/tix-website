@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Hero } from './components/Hero'
 import { BackedBy } from './components/BackedBy'
 import { TheIssue } from './components/TheIssue'
@@ -6,8 +6,15 @@ import { WhatIsTix } from './components/WhatIsTix'
 import { Proof } from './components/Proof'
 import { Footer } from './components/Footer'
 import { FloatingControls } from './components/FloatingControls'
+import { NetworkBackground } from './components/NetworkBackground'
+
+// Toggle to show shader controls (set to true for testing)
+const SHOW_DEV_CONTROLS = false
 
 const App: React.FC = () => {
+  // Footer visibility state for navbar fade
+  const footerRef = useRef<HTMLElement>(null)
+  const [isFooterVisible, setIsFooterVisible] = useState(false)
   // Shader Control States
   const [speed, setSpeed] = useState(0.20)
   const [glow, setGlow] = useState(1.50)
@@ -19,6 +26,27 @@ const App: React.FC = () => {
   const [iterations, setIterations] = useState(12)
   const [interactionMin, setInteractionMin] = useState(0.0)
   const [interactionMax, setInteractionMax] = useState(4.2)
+  
+  // Color adjustment states
+  const [brightness, setBrightness] = useState(0.6)
+  const [contrast, setContrast] = useState(1.0)
+  const [saturation, setSaturation] = useState(1.15)
+
+  // Footer visibility observer for navbar fade
+  useEffect(() => {
+    const footer = footerRef.current
+    if (!footer) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    observer.observe(footer)
+    return () => observer.disconnect()
+  }, [])
 
   // Interaction Logic (Mouse & Scroll)
   useEffect(() => {
@@ -42,11 +70,14 @@ const App: React.FC = () => {
     }
 
     const handleScroll = () => {
-      // Use scroll interaction on mobile
+      // Use scroll interaction on mobile - exaggerated effect
       if (window.innerWidth < 768) {
-        const scrollMax = document.documentElement.scrollHeight - window.innerHeight
-        const scrollNorm = Math.min(window.scrollY / (window.innerHeight * 1.5), 1) // Cap effect at 1.5 screens
-        setInteraction(scrollNorm)
+        const scrollNorm = Math.min(window.scrollY / (window.innerHeight * 0.8), 1) // Faster ramp - full effect at 0.8 screens
+        setInteraction(scrollNorm * 1.5) // Push interaction beyond desktop range
+        
+        // Exaggerated glow: 1.0 - 2.8 range (wider than desktop)
+        const glowValue = 1.0 + scrollNorm * 1.8
+        setGlow(glowValue)
       }
     }
 
@@ -61,6 +92,7 @@ const App: React.FC = () => {
 
   return (
     <main className="relative min-h-screen bg-black text-white overflow-x-hidden selection:bg-white/20">
+      <NetworkBackground />
       
       <Hero 
         speed={speed}
@@ -71,6 +103,10 @@ const App: React.FC = () => {
         iterations={iterations}
         interactionMin={interactionMin}
         interactionMax={interactionMax}
+        brightness={brightness}
+        contrast={contrast}
+        saturation={saturation}
+        isFooterVisible={isFooterVisible}
       />
 
       {/* Content Sections */}
@@ -79,20 +115,25 @@ const App: React.FC = () => {
         <TheIssue />
         <WhatIsTix />
         <Proof />
-        <Footer />
+        <Footer ref={footerRef} />
       </div>
 
-      {/* Floating Controls */}
-      <FloatingControls 
-        speed={speed} setSpeed={setSpeed}
-        glow={glow} setGlow={setGlow}
-        distortion={distortion} setDistortion={setDistortion}
-        enableInteraction={enableInteraction}
-        setEnableInteraction={setEnableInteraction}
-        iterations={iterations} setIterations={setIterations}
-        interactionMin={interactionMin} setInteractionMin={setInteractionMin}
-        interactionMax={interactionMax} setInteractionMax={setInteractionMax}
-      />
+      {/* Floating Controls - Hidden for production, set SHOW_DEV_CONTROLS = true to enable */}
+      {SHOW_DEV_CONTROLS && (
+        <FloatingControls 
+          speed={speed} setSpeed={setSpeed}
+          glow={glow} setGlow={setGlow}
+          distortion={distortion} setDistortion={setDistortion}
+          enableInteraction={enableInteraction}
+          setEnableInteraction={setEnableInteraction}
+          iterations={iterations} setIterations={setIterations}
+          interactionMin={interactionMin} setInteractionMin={setInteractionMin}
+          interactionMax={interactionMax} setInteractionMax={setInteractionMax}
+          brightness={brightness} setBrightness={setBrightness}
+          contrast={contrast} setContrast={setContrast}
+          saturation={saturation} setSaturation={setSaturation}
+        />
+      )}
 
     </main>
   )

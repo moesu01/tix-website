@@ -16,6 +16,12 @@ interface FloatingControlsProps {
   setInteractionMin: (v: number) => void;
   interactionMax: number;
   setInteractionMax: (v: number) => void;
+  brightness: number;
+  setBrightness: (v: number) => void;
+  contrast: number;
+  setContrast: (v: number) => void;
+  saturation: number;
+  setSaturation: (v: number) => void;
 }
 
 export const FloatingControls: React.FC<FloatingControlsProps> = ({
@@ -33,8 +39,14 @@ export const FloatingControls: React.FC<FloatingControlsProps> = ({
   setInteractionMin,
   interactionMax,
   setInteractionMax,
+  brightness,
+  setBrightness,
+  contrast,
+  setContrast,
+  saturation,
+  setSaturation,
 }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   if (!isOpen) {
     return (
@@ -126,6 +138,59 @@ export const FloatingControls: React.FC<FloatingControlsProps> = ({
               value={iterations}
               onChange={(e) => setIterations(parseInt(e.target.value))}
               className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-blue-400 [&::-webkit-slider-thumb]:rounded-full"
+            />
+          </div>
+        </div>
+
+        {/* Color Adjustments */}
+        <div className="space-y-4 border-b border-white/10 pb-4">
+          <p className="text-[10px] uppercase tracking-widest text-white/40 mb-2">Color Adjustments</p>
+          
+          <div className="space-y-2">
+            <div className="flex justify-between text-xs uppercase tracking-wider text-white/60">
+              <label>Brightness</label>
+              <span>{brightness.toFixed(2)}</span>
+            </div>
+            <input
+              type="range"
+              min="0.5"
+              max="1.5"
+              step="0.05"
+              value={brightness}
+              onChange={(e) => setBrightness(parseFloat(e.target.value))}
+              className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-yellow-400 [&::-webkit-slider-thumb]:rounded-full"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex justify-between text-xs uppercase tracking-wider text-white/60">
+              <label>Contrast</label>
+              <span>{contrast.toFixed(2)}</span>
+            </div>
+            <input
+              type="range"
+              min="0.5"
+              max="1.5"
+              step="0.05"
+              value={contrast}
+              onChange={(e) => setContrast(parseFloat(e.target.value))}
+              className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-orange-400 [&::-webkit-slider-thumb]:rounded-full"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex justify-between text-xs uppercase tracking-wider text-white/60">
+              <label>Saturation</label>
+              <span>{saturation.toFixed(2)}</span>
+            </div>
+            <input
+              type="range"
+              min="0.0"
+              max="2.0"
+              step="0.05"
+              value={saturation}
+              onChange={(e) => setSaturation(parseFloat(e.target.value))}
+              className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-pink-400 [&::-webkit-slider-thumb]:rounded-full"
             />
           </div>
         </div>

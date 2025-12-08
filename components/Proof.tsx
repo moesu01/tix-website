@@ -1,33 +1,125 @@
-import React from 'react'
+interface ArtistImage {
+  src: string
+  desktopStyle: {
+    left?: string
+    right?: string
+    top?: string
+    bottom?: string
+  }
+  borderRadius: number
+  zIndex: number
+}
+
+const artistImages: ArtistImage[] = [
+  {
+    src: '/artists/artist_1.png',
+    desktopStyle: { left: '0', top: '80px' },
+    borderRadius: 40,
+    zIndex: 10,
+  },
+  {
+    src: '/artists/artist_2.png',
+    desktopStyle: { left: '140px', top: '0' },
+    borderRadius: 40,
+    zIndex: 20,
+  },
+  {
+    src: '/artists/artist_3.png',
+    desktopStyle: { right: '0', top: '80px' },
+    borderRadius: 100,
+    zIndex: 15,
+  },
+  {
+    src: '/artists/artist_4.png',
+    desktopStyle: { left: '60px', top: '210px' },
+    borderRadius: 100,
+    zIndex: 25,
+  },
+  {
+    src: '/artists/artist_5.png',
+    desktopStyle: { left: '200px', top: '330px' },
+    borderRadius: 40,
+    zIndex: 10,
+  },
+  {
+    src: '/artists/artist_6.png',
+    desktopStyle: { right: '40px', top: '230px' },
+    borderRadius: 40,
+    zIndex: 15,
+  },
+]
+
+const getImageStyles = (borderRadius: number) => ({
+  boxShadow: 'inset 0 0 4px rgba(255, 255, 255, 0.2)',
+  border: '1px solid rgba(255, 255, 255, 0.1)',
+  borderRadius: `${borderRadius}px`,
+})
 
 export const Proof = () => (
   <section className="py-24 bg-zinc-950 border-t border-white/10">
-    <div className="section-container flex flex-col md:flex-row items-center justify-between gap-12">
-      <div className="md:w-1/2">
+    <div className="section-container flex flex-col md:flex-row items-start justify-between gap-12">
+      {/* Text Content */}
+      <div className="md:w-[45%] md:flex-shrink-0">
         <p className="subhead mb-4">ALREADY WORKING</p>
-        <h2 className="serif text-5xl md:text-6xl text-white mb-8">
+        <h2 className="serif text-5xl md:text-6xl gradient-text-hero mb-8">
           Trusted by the world's biggest artists & venues.
         </h2>
-        <p className="text-zinc-400 text-lg leading-relaxed mb-8">
+        <p className="gradient-text-body max-w-md text-lg leading-relaxed mb-4">
           Over 1,000+ global artists already use programmable ticketing standards that TIX enables, bringing fans closer and value back to creators.
         </p>
-        <button className="px-8 py-3 bg-white/10 border border-white/20 hover:bg-white text-white hover:text-black transition-all rounded-lg font-medium text-sm">
-          Join Waitlist
+        <p className="gradient-text-body max-w-md text-lg leading-relaxed mb-8">
+          TIX powers the next generation of live shows, from sold-out arenas to emerging tours.
+        </p>
+        <button 
+          className="cta-gradient px-6 py-3 font-semibold transition-all hover:opacity-90"
+          aria-label="Join the TIX waitlist"
+          tabIndex={0}
+        >
+          <span className="text-white/75">Join Waitlist</span>
         </button>
       </div>
-      <div className="md:w-1/2 relative h-[500px] w-full">
-         {/* Circular Collage simulation */}
-         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full overflow-hidden border-4 border-zinc-900 z-20">
-             <img src="https://picsum.photos/400/400?random=1" className="w-full h-full object-cover" />
-         </div>
-         <div className="absolute top-20 left-10 w-40 h-40 rounded-full overflow-hidden border-4 border-zinc-900 z-10 opacity-60">
-             <img src="https://picsum.photos/400/400?random=2" className="w-full h-full object-cover" />
-         </div>
-         <div className="absolute bottom-20 right-10 w-48 h-48 rounded-full overflow-hidden border-4 border-zinc-900 z-10 opacity-60">
-             <img src="https://picsum.photos/400/400?random=3" className="w-full h-full object-cover" />
-         </div>
+
+      {/* Artist Images Collage - Desktop Scattered Layout */}
+      <div className="hidden md:block md:w-[55%] relative h-[480px]">
+        {artistImages.map((image, index) => (
+          <div
+            key={index}
+            className="absolute w-[134px] h-[134px] overflow-hidden"
+            style={{
+              ...getImageStyles(image.borderRadius),
+              ...image.desktopStyle,
+              zIndex: image.zIndex,
+            }}
+          >
+            <img
+              src={image.src}
+              alt={`Featured artist ${index + 1}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Artist Images Collage - Mobile Grid */}
+      <div className="md:hidden w-full">
+        <div className="grid grid-cols-3 gap-3 max-w-[340px] mx-auto">
+          {artistImages.map((image, index) => (
+            <div
+              key={index}
+              className="w-[100px] h-[100px] overflow-hidden"
+              style={getImageStyles(image.borderRadius)}
+            >
+              <img
+                src={image.src}
+                alt={`Featured artist ${index + 1}`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 )
-

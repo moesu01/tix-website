@@ -16,6 +16,9 @@ uniform float uInteraction; // 0.0 to 1.0 from mouse/scroll
 uniform float uIterations; // Dynamic iteration count
 uniform float uInteractionMin; 
 uniform float uInteractionMax;
+uniform float uBrightness;
+uniform float uContrast;
+uniform float uSaturation;
 
 varying vec2 vUv;
 
@@ -48,6 +51,21 @@ float sdSphere(vec3 p, float r){
 float tanh_approx(float x) {
   float e2x = exp(2.0 * clamp(x, -5.0, 5.0));
   return (e2x - 1.0) / (e2x + 1.0);
+}
+
+// Color adjustment: brightness, contrast, saturation
+vec3 adjustColor(vec3 color, float brightness, float contrast, float saturation) {
+  // Brightness - simple multiply
+  color *= brightness;
+  
+  // Contrast - pivot around mid-gray
+  color = (color - 0.5) * contrast + 0.5;
+  
+  // Saturation - lerp toward luminance
+  float luminance = dot(color, vec3(0.2126, 0.7152, 0.0722));
+  color = mix(vec3(luminance), color, saturation);
+  
+  return clamp(color, 0.0, 1.0);
 }
 
 void main() {
@@ -107,12 +125,19 @@ void main() {
     tanh_approx(col.b / 20.0)
   );
   
+  // Apply brightness, contrast, saturation adjustments
+  col = adjustColor(col, uBrightness, uContrast, uSaturation);
+  
   // Vignette
   float dist = length(vUv * 2.0 - 1.0);
   float vignette = 1.0 - smoothstep(0.5, 1.5, dist);
   col *= vignette;
 
-  gl_FragColor = vec4(col, 1.0);
+  // Calculate alpha based on brightness so background shows through dark areas
+  float brightness = (col.r + col.g + col.b) / 3.0;
+  float alpha = smoothstep(0.0, 0.15, brightness);
+
+  gl_FragColor = vec4(col, alpha);
 }
 `;
 
@@ -140,6 +165,9 @@ class TixShaderMaterial extends ShaderMaterial {
         uIterations: { value: 10.0 },
         uInteractionMin: { value: 0.0 },
         uInteractionMax: { value: 3.0 },
+        uBrightness: { value: 1.0 },
+        uContrast: { value: 1.0 },
+        uSaturation: { value: 1.0 },
       },
     });
   }
@@ -154,7 +182,10 @@ const ScreenQuad: React.FC<ShaderControlProps> = ({
   interaction, 
   iterations, 
   interactionMin, 
-  interactionMax 
+  interactionMax,
+  brightness,
+  contrast,
+  saturation,
 }) => {
   const materialRef = useRef<TixShaderMaterial>(null);
   
@@ -173,6 +204,11 @@ const ScreenQuad: React.FC<ShaderControlProps> = ({
       materialRef.current.uniforms.uIterations.value = iterations;
       materialRef.current.uniforms.uInteractionMin.value = interactionMin;
       materialRef.current.uniforms.uInteractionMax.value = interactionMax;
+      
+      // Color adjustments - lerped for smooth transitions
+      materialRef.current.uniforms.uBrightness.value = THREE.MathUtils.lerp(materialRef.current.uniforms.uBrightness.value, brightness, 0.1);
+      materialRef.current.uniforms.uContrast.value = THREE.MathUtils.lerp(materialRef.current.uniforms.uContrast.value, contrast, 0.1);
+      materialRef.current.uniforms.uSaturation.value = THREE.MathUtils.lerp(materialRef.current.uniforms.uSaturation.value, saturation, 0.1);
     }
   });
 
