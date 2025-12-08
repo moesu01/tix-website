@@ -6,7 +6,6 @@ import { WhatIsTix } from './components/WhatIsTix'
 import { Proof } from './components/Proof'
 import { Footer } from './components/Footer'
 import { FloatingControls } from './components/FloatingControls'
-import { NetworkBackground } from './components/NetworkBackground'
 
 // Toggle to show shader controls (set to true for testing)
 const SHOW_DEV_CONTROLS = false
@@ -91,8 +90,14 @@ const App: React.FC = () => {
   }, [enableInteraction])
 
   return (
-    <main className="relative min-h-screen bg-black text-white overflow-x-hidden selection:bg-white/20">
-      <NetworkBackground />
+    <main 
+      className="relative min-h-screen bg-black text-white overflow-x-hidden selection:bg-white/20"
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E")`,
+        backgroundSize: '16px 16px',
+        backgroundRepeat: 'repeat',
+      }}
+    >
       
       <Hero 
         speed={speed}
