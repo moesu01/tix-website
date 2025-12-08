@@ -25,7 +25,7 @@ export const Footer = React.forwardRef<HTMLElement>((_, ref) => (
             aria-label="Join Waitlist"
             tabIndex={0}
           >
-            <span className="text-white/75">Join Waitlist</span>
+            <span className="text-white/75">Join TGE Waitlist</span>
           </button>
         </div>
       </div>

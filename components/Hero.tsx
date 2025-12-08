@@ -133,7 +133,7 @@ export const Hero = ({
           // Layout
           'relative flex flex-col md:block content-center',
           // Sizing
-          'w-full h-screen',
+          'w-full h-auto md:h-screen pb-12 md:pb-0',
           'min-h-[600px] lg:max-h-[800px] max-w-[1500px]',
           // Spacing
           'mx-auto',
@@ -149,7 +149,7 @@ export const Hero = ({
               <h1 className="serif text-6xl md:text-7xl lg:text-8xl leading-[0.9] gradient-text-hero pt-2 overflow-visible">
                 The Standard <br /> for Tickets
               </h1>
-              <p className="text-[18px] lg:text-[20px] font-light leading-[1.3] max-w-[300px] lg:max-w-[350px] mx-auto md:mx-0 gradient-text-body tracking-[0.01em]">
+              <p className="text-[18px] lg:text-[20px] font-light leading-[1.3] max-w-[300px] lg:max-w-[350px] mx-auto md:mx-0 gradient-text-body tracking-[0.01em] md:mb-12">
                 Live event ticketing, modernized through onchain infrastructure.
               </p>
               <div className="flex flex-col md:flex-row gap-4 items-center justify-center md:justify-start">
