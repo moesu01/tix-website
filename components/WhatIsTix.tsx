@@ -11,14 +11,14 @@ export const WhatIsTix = () => (
         </div>
         <p className="subhead mb-2">WHAT IS TIX</p>
         <h2 className="serif text-6xl gradient-text-hero mb-4">Programmable Tickets</h2>
-        <p className="gradient-text-body ">With built-in royalties, liquidity,<br className="md:hidden" /> and investor yield.</p>
+        <p className="gradient-text-body ">Built-in royalties, liquidity, and investor yield.<br className="hidden md:block" /> For venues, artists, and fans</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          { title: "Liquidity & Yield", desc: "Venues turn future ticket sales into capital, without giving up ticketing rights.", img: "liquidity_b.png" },
+          { title: "Liquidity & Yield", desc: "Access upfront capital from onchain liquidity pools, without giving up ticketing rights.", img: "liquidity_b.png" },
           { title: "Fraud-Proof", desc: "Fans enjoy fair prices with tickets that are always authentic, validated across markets.", img: "fraud-proof_a.png" },
-          { title: "Programmable", desc: "Smart contracts turn static tickets into programmable real-world assets.", img: "programmable_b.png" }
+          { title: "Programmable", desc: "Programmable pricing, automated revenue splits, and enforceable resale terms.", img: "programmable_b.png" }
         ].map((item, i) => (
           <div key={i} className="group cursor-default">
             <div className="aspect-[4/3] w-full rounded-xl overflow-hidden border border-white/30 bg-transparent mb-6 relative flex items-center justify-center">

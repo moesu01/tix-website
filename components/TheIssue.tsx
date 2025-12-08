@@ -4,30 +4,28 @@ import { motion } from 'framer-motion'
 export const TheIssue = () => (
   <section className="py-12 md:py-24 bg-zinc-950 relative overflow-hidden">
     <div className="section-container relative z-10">
+{/* Hidden for now
       <div 
         className="md:mb-48 mb-24 text-center border border-white/10 rounded-4xl py-6 md:py-12 px-6 md:px-12"
-        // style={{
-        //   backgroundImage: `url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E")`,
-        //   backgroundSize: '16px 16px'
-        // }}
       >
         <p className="subhead mb-4">THE HIDDEN UNLOCK</p>
         <h2 className="text-4xl md:text-7xl serif font-thin gradient-text-hero">
           Ticketing companies are banks.
         </h2>
       </div>
+      */}
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Left Text */}
         <div className="md:col-span-7 flex flex-col md:pr-8">
            <div>
              <p className="subhead mb-6">The Real Issue</p>
-             <h2 className="serif text-5xl md:text-6xl gradient-text-hero mb-6 md:mb-0">Artists don't choose their ticketing, venues do.</h2>
+             <h2 className="serif text-5xl md:text-7xl gradient-text-hero mb-6 md:mb-0">Ticketing companies <br className="hidden md:block" />are banks.</h2>
            </div>
            <div className="space-y-4 text-[16px] lg:text-[18px] font-light gradient-text-body leading-relaxed mt-auto md:max-w-md">
-             <p>For years venues have sacrificed their data, resale by giving up their ticketing rights for multiple years to get liquidity to pay artist deposits from the only bank available. Ticketmaster.</p>
-             <p>This has left venues without their data, stuck to a ticket standard that has resulted in rampant fraud and ridiculous fees that are actually interest rates.</p>
-             <p>Artists lose, fans lose and venues lose.</p>
+             <p>Legacy ticketing companies control the capital that artists and venues need.</p>
+             <p>For decades, venues have relied on ticketing lenders to finance deposits, production costs, and advances, trading away control, fan data, and future revenue for upfront liquidity.</p>
+             <p>TIX changes that by separating and upgrading the financing and settlement rails underneath ticketing, giving both sides more choice, transparency, and leverage.</p>
            </div>
          </div>
 

@@ -52,7 +52,7 @@ const App: React.FC = () => {
   const [interactionMax, setInteractionMax] = useState(4.2)
   
   // Color adjustment states
-  const [brightness, setBrightness] = useState(0.6)
+  const [brightness, setBrightness] = useState(0.7)
   const [contrast, setContrast] = useState(1.0)
   const [saturation, setSaturation] = useState(1.15)
 

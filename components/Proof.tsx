@@ -65,7 +65,7 @@ export const Proof = () => (
           Trusted by the world's biggest artists & venues.
         </h2>
         <p className="gradient-text-body max-w-md text-lg leading-relaxed mb-4">
-          Over 1,000+ global artists already use programmable ticketing standards that TIX enables, bringing fans closer and value back to creators.
+          Over 1,000+ artists worldwide are already using the new, programmable ticketing standard powered by TIX, bringing fans closer and returning value to creators.
         </p>
         <p className="gradient-text-body max-w-md text-lg leading-relaxed mb-8">
           TIX powers the next generation of live shows, from sold-out arenas to emerging tours.
@@ -75,7 +75,7 @@ export const Proof = () => (
           aria-label="Join the TIX waitlist"
           tabIndex={0}
         >
-          <span className="text-white/75">Join Waitlist</span>
+          <span className="text-white/75">Join TGE Waitlist</span>
         </button>
       </div>
 

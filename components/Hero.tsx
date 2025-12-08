@@ -120,7 +120,7 @@ export const Hero = ({
                 aria-hidden={!isPastHero}
                 tabIndex={isPastHero ? 0 : -1}
               >
-                <span className="text-white/75">Join Waitlist</span>
+                <span className="text-white/75">Join TGE Waitlist</span>
               </button>
             </div>
           </div>
@@ -156,7 +156,7 @@ export const Hero = ({
                 <div className="relative">
                   <div className="cta-glow" aria-hidden="true" />
                   <button className="cta-gradient px-6 py-3 font-semibold transition-all hover:opacity-90">
-                    <span className="text-white/75">Join Waitlist</span>
+                    <span className="text-white/75">Join TGE Waitlist</span>
                   </button>
                 </div>
               </div>
