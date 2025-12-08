@@ -14,6 +14,7 @@ uniform float uGlow;
 uniform float uDistortion; // Base distortion
 uniform float uInteraction; // 0.0 to 1.0 from mouse/scroll
 uniform float uIterations; // Dynamic iteration count
+uniform float uFbmIterations; // FBM loop iterations (2-4)
 uniform float uInteractionMin; 
 uniform float uInteractionMax;
 uniform float uBrightness;
@@ -24,6 +25,7 @@ varying vec2 vUv;
 
 #define PI 3.141596
 #define MAX_ITERATIONS 30.0
+#define MAX_FBM_ITERATIONS 4.0
 
 mat2 rotate(float a){
   float s = sin(a);
@@ -31,14 +33,13 @@ mat2 rotate(float a){
   return mat2(c,-s,s,c);
 }
 
-float fbm(vec3 p){
-  float amp = 1.;
-  float fre = 1.;
+// FBM with configurable iterations for mobile optimization
+float fbm(vec3 p, float maxIter){
   float n = 0.;
-  for(float i =0.;i<4.;i++){
+  for(float i = 0.; i < MAX_FBM_ITERATIONS; i++){
+    if (i >= maxIter) break;
     n += abs(dot(cos(p), vec3(.1)));
-    amp *= .5;
-    fre *= 2.;
+    p *= 2.0; // frequency doubling baked in
   }
   return n;
 }
@@ -47,10 +48,9 @@ float sdSphere(vec3 p, float r){
     return length(p)-r;
 }
 
-// Hyperbolic tangent polyfill
-float tanh_approx(float x) {
-  float e2x = exp(2.0 * clamp(x, -5.0, 5.0));
-  return (e2x - 1.0) / (e2x + 1.0);
+// Reinhard tone mapping - cheaper than tanh for mobile
+vec3 reinhardTonemap(vec3 col) {
+  return col / (1.0 + col);
 }
 
 // Color adjustment: brightness, contrast, saturation
@@ -108,7 +108,7 @@ void main() {
     float d = abs(sdSphere(p, 4.) * .9) + .01;
 
     // Incorporate distortion and interaction into the noise
-    d += fbm(p * (1.8 + totalDistortion)) * 0.2;
+    d += fbm(p * (1.8 + totalDistortion), uFbmIterations) * 0.2;
 
     // Color accumulation with Glow control
     vec3 glowColor = (1.1 + sin(vec3(3., 2., 1.) + dot(p, vec3(1.)) + time));
@@ -118,12 +118,8 @@ void main() {
     z += d;
   }
 
-  // Tone mapping
-  col = vec3(
-    tanh_approx(col.r / 20.0), 
-    tanh_approx(col.g / 20.0), 
-    tanh_approx(col.b / 20.0)
-  );
+  // Tone mapping - Reinhard (cheaper than tanh, single vectorized call)
+  col = reinhardTonemap(col / 20.0);
   
   // Apply brightness, contrast, saturation adjustments
   col = adjustColor(col, uBrightness, uContrast, uSaturation);
@@ -163,6 +159,7 @@ class TixShaderMaterial extends ShaderMaterial {
         uDistortion: { value: 0.0 },
         uInteraction: { value: 0.0 },
         uIterations: { value: 10.0 },
+        uFbmIterations: { value: 4.0 },
         uInteractionMin: { value: 0.0 },
         uInteractionMax: { value: 3.0 },
         uBrightness: { value: 1.0 },
@@ -181,6 +178,7 @@ const ScreenQuad: React.FC<ShaderControlProps> = ({
   distortion, 
   interaction, 
   iterations, 
+  fbmIterations,
   interactionMin, 
   interactionMax,
   brightness,
@@ -188,11 +186,18 @@ const ScreenQuad: React.FC<ShaderControlProps> = ({
   saturation,
 }) => {
   const materialRef = useRef<TixShaderMaterial>(null);
+  const { size } = useThree();
+  const lastSize = useRef({ width: 0, height: 0 });
   
   useFrame((state) => {
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
-      materialRef.current.uniforms.uResolution.value.set(state.size.width, state.size.height);
+      
+      // Only update resolution when it actually changes (optimization)
+      if (lastSize.current.width !== size.width || lastSize.current.height !== size.height) {
+        materialRef.current.uniforms.uResolution.value.set(size.width, size.height);
+        lastSize.current = { width: size.width, height: size.height };
+      }
       
       // Lerp values for smoothness
       materialRef.current.uniforms.uSpeed.value = THREE.MathUtils.lerp(materialRef.current.uniforms.uSpeed.value, speed, 0.1);
@@ -202,6 +207,7 @@ const ScreenQuad: React.FC<ShaderControlProps> = ({
       
       // These can be set directly or lerped. Direct is usually fine for sliders.
       materialRef.current.uniforms.uIterations.value = iterations;
+      materialRef.current.uniforms.uFbmIterations.value = fbmIterations;
       materialRef.current.uniforms.uInteractionMin.value = interactionMin;
       materialRef.current.uniforms.uInteractionMax.value = interactionMax;
       
@@ -221,17 +227,18 @@ const ScreenQuad: React.FC<ShaderControlProps> = ({
   );
 };
 
-// Glow filter style - uses drop-shadow to follow the SVG shape
-const glowFilterStyle: React.CSSProperties = {
-  filter: `
-    drop-shadow(0 0 40px rgba(0, 0, 0, 0.4))
-    drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))
-    drop-shadow(0 0 12px #B6D4FF)
-    drop-shadow(0 0 30px #B6D4FF)
-    drop-shadow(0 0 50px rgba(255, 255, 255, 0.6))
-    drop-shadow(0 0 80px rgba(255, 255, 255, 0.4))
-  `,
-}
+// Shadow presets ordered by importance - more shadows = higher quality
+const SHADOW_PRESETS = [
+  'drop-shadow(0 0 12px #B6D4FF)',                    // Core glow (always)
+  'drop-shadow(0 0 30px #B6D4FF)',                    // Medium spread
+  'drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))',    // White highlight
+  'drop-shadow(0 0 50px rgba(255, 255, 255, 0.6))',   // Large soft glow
+]
+
+// Glow filter style - configurable shadow count for mobile optimization
+const getGlowFilterStyle = (shadowCount: number): React.CSSProperties => ({
+  filter: SHADOW_PRESETS.slice(0, Math.min(shadowCount, SHADOW_PRESETS.length)).join(' '),
+})
 
 const getSvgContainerStyle = (): React.CSSProperties => ({
   background: `
@@ -256,18 +263,23 @@ const getSvgContainerStyle = (): React.CSSProperties => ({
   maskSize: 'contain',
 })
 
-export const HeroShader: React.FC<ShaderControlProps & { className?: string }> = ({ className, ...props }) => {
+export const HeroShader: React.FC<ShaderControlProps & { className?: string }> = ({ 
+  className, 
+  dpr,
+  shadowCount,
+  ...props 
+}) => {
   return (
     <div className={`${className || 'w-full h-full'} relative`}>
       <Canvas
-        dpr={[1, 2]}
+        dpr={[1, dpr]}
         gl={{ 
           antialias: false, 
           alpha: true,
           powerPreference: "high-performance"
         }}
       >
-        <ScreenQuad {...props} />
+        <ScreenQuad {...props} dpr={dpr} shadowCount={shadowCount} />
       </Canvas>
 
       {/* Logo overlay - centered absolutely */}
@@ -276,7 +288,7 @@ export const HeroShader: React.FC<ShaderControlProps & { className?: string }> =
         {/* SVG ratio is 161:175 (w:h), 120px on mobile, 180px on desktop */}
         <div 
           className="h-[120px] w-[110px] md:h-[180px] md:w-[165px]"
-          style={glowFilterStyle}
+          style={getGlowFilterStyle(shadowCount)}
         >
           {/* SVG container - applies background gradient as fill via mask */}
           <div 

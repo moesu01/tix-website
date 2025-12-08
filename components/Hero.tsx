@@ -9,11 +9,14 @@ interface HeroProps {
   interaction: number
   enableInteraction: boolean
   iterations: number
+  fbmIterations: number
   interactionMin: number
   interactionMax: number
   brightness: number
   contrast: number
   saturation: number
+  dpr: number
+  shadowCount: number
   isFooterVisible: boolean
 }
 
@@ -24,11 +27,14 @@ export const Hero = ({
   interaction,
   enableInteraction,
   iterations,
+  fbmIterations,
   interactionMin,
   interactionMax,
   brightness,
   contrast,
   saturation,
+  dpr,
+  shadowCount,
   isFooterVisible,
 }: HeroProps) => {
   const [isPastHero, setIsPastHero] = useState(false)
@@ -200,11 +206,14 @@ export const Hero = ({
             interaction={interaction}
             enableInteraction={enableInteraction}
             iterations={iterations}
+            fbmIterations={fbmIterations}
             interactionMin={interactionMin}
             interactionMax={interactionMax}
             brightness={brightness}
             contrast={contrast}
             saturation={saturation}
+            dpr={dpr}
+            shadowCount={shadowCount}
             className="w-full h-full absolute inset-"
           />
           

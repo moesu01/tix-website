@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Settings2, X } from 'lucide-react';
+import { QualityPreset, QUALITY_PRESETS } from '../types';
 
 interface FloatingControlsProps {
   speed: number;
@@ -12,6 +13,8 @@ interface FloatingControlsProps {
   setEnableInteraction: (v: boolean) => void;
   iterations: number;
   setIterations: (v: number) => void;
+  fbmIterations: number;
+  setFbmIterations: (v: number) => void;
   interactionMin: number;
   setInteractionMin: (v: number) => void;
   interactionMax: number;
@@ -22,6 +25,8 @@ interface FloatingControlsProps {
   setContrast: (v: number) => void;
   saturation: number;
   setSaturation: (v: number) => void;
+  qualityPreset: QualityPreset;
+  setQualityPreset: (v: QualityPreset) => void;
 }
 
 export const FloatingControls: React.FC<FloatingControlsProps> = ({
@@ -35,6 +40,8 @@ export const FloatingControls: React.FC<FloatingControlsProps> = ({
   setEnableInteraction,
   iterations,
   setIterations,
+  fbmIterations,
+  setFbmIterations,
   interactionMin,
   setInteractionMin,
   interactionMax,
@@ -45,6 +52,8 @@ export const FloatingControls: React.FC<FloatingControlsProps> = ({
   setContrast,
   saturation,
   setSaturation,
+  qualityPreset,
+  setQualityPreset,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -75,6 +84,30 @@ export const FloatingControls: React.FC<FloatingControlsProps> = ({
       </div>
 
       <div className="space-y-6">
+        {/* Quality Preset Selector */}
+        <div className="space-y-3 border-b border-white/10 pb-4">
+          <p className="text-[10px] uppercase tracking-widest text-white/40">Quality Preset (Mobile Optimization)</p>
+          <div className="flex gap-2">
+            {(['high', 'balanced', 'low'] as QualityPreset[]).map((preset) => (
+              <button
+                key={preset}
+                onClick={() => setQualityPreset(preset)}
+                className={`flex-1 px-3 py-2 text-xs uppercase tracking-wider rounded-lg transition-all ${
+                  qualityPreset === preset
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white/10 text-white/60 hover:bg-white/20'
+                }`}
+              >
+                {preset}
+              </button>
+            ))}
+          </div>
+          <div className="text-[10px] text-white/40 space-y-1">
+            <p>DPR: {QUALITY_PRESETS[qualityPreset].dpr} | Shadows: {QUALITY_PRESETS[qualityPreset].shadowCount}</p>
+            <p>Iterations: {QUALITY_PRESETS[qualityPreset].iterations} | FBM: {QUALITY_PRESETS[qualityPreset].fbmIterations}</p>
+          </div>
+        </div>
+
         {/* Core Settings */}
         <div className="space-y-4 border-b border-white/10 pb-4">
           <div className="space-y-2">
@@ -127,7 +160,7 @@ export const FloatingControls: React.FC<FloatingControlsProps> = ({
           
           <div className="space-y-2">
             <div className="flex justify-between text-xs uppercase tracking-wider text-white/60">
-              <label>Quality (Iterations)</label>
+              <label>Ray Iterations</label>
               <span>{iterations}</span>
             </div>
             <input
@@ -138,6 +171,22 @@ export const FloatingControls: React.FC<FloatingControlsProps> = ({
               value={iterations}
               onChange={(e) => setIterations(parseInt(e.target.value))}
               className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-blue-400 [&::-webkit-slider-thumb]:rounded-full"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex justify-between text-xs uppercase tracking-wider text-white/60">
+              <label>FBM Iterations</label>
+              <span>{fbmIterations}</span>
+            </div>
+            <input
+              type="range"
+              min="1"
+              max="4"
+              step="1"
+              value={fbmIterations}
+              onChange={(e) => setFbmIterations(parseInt(e.target.value))}
+              className="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-green-400 [&::-webkit-slider-thumb]:rounded-full"
             />
           </div>
         </div>
