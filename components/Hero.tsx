@@ -187,7 +187,7 @@ export const Hero = ({
             'md:w-full md:h-full md:ml-0 md:mt-0 md:aspect-auto',
             'order-1 md:order-none',
             // Desktop positioning
-            'md:absolute md:-right-0 md:translate-x-1/3 md:top-1/2 md:-translate-y-1/2 lg:-right-0 lg:translate-x-1/8',
+            'md:absolute md:-right-0 md:translate-x-1/3 md:top-1/2 md:-translate-y-1/2 lg:-right-0 lg:translate-x-1/5',
             // Z-index
             'z-10',
             
