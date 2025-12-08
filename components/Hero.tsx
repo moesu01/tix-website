@@ -64,12 +64,12 @@ export const Hero = ({
         <div className="max-w-[1500px] mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
              <img 
-               src="/tix_symbol.png" 
+               src={`${import.meta.env.BASE_URL}tix_symbol.png`} 
                alt="Tix Logo" 
                className="h-8 w-auto"
              />
              <img 
-               src="/tix_word.svg" 
+               src={`${import.meta.env.BASE_URL}tix_word.svg`} 
                alt="TIX" 
                className="h-8 w-auto"
              />
@@ -159,17 +159,17 @@ export const Hero = ({
               <p className="mb-3">Built by and for builders from:</p>
               <div className="flex items-center justify-center md:justify-start gap-6">
                 <img 
-                  src="/backed/live-nation.png" 
+                  src={`${import.meta.env.BASE_URL}backed/live-nation.png`} 
                   alt="Live Nation" 
                   className="h-4 w-auto opacity-50"
                 />
                 <img 
-                  src="/backed/tm.svg" 
+                  src={`${import.meta.env.BASE_URL}backed/tm.svg`} 
                   alt="Ticketmaster" 
                   className="h-4 w-auto opacity-50"
                 />
                 <img 
-                  src="/backed/vivid seats.png" 
+                  src={`${import.meta.env.BASE_URL}backed/vivid seats.png`} 
                   alt="Vivid Seats" 
                   className="h-4 w-auto opacity-50"
                 />

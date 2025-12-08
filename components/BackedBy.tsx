@@ -1,10 +1,10 @@
 const investors = [
-  { name: 'a16z', src: '/backed/a16z.png', tall: false },
-  { name: 'Founders Fund', src: '/backed/founders fund.png', tall: true },
-  { name: 'Comcast Ventures', src: '/backed/comcast.png', tall: true },
-  { name: 'NBCUniversal', src: '/backed/nbcu.png', tall: false },
-  { name: 'CAA', src: '/backed/caa.png', tall: false },
-  { name: 'UTA', src: '/backed/UTA.png', tall: true },
+  { name: 'a16z', src: 'backed/a16z.png', tall: false },
+  { name: 'Founders Fund', src: 'backed/founders fund.png', tall: true },
+  { name: 'Comcast Ventures', src: 'backed/comcast.png', tall: true },
+  { name: 'NBCUniversal', src: 'backed/nbcu.png', tall: false },
+  { name: 'CAA', src: 'backed/caa.png', tall: false },
+  { name: 'UTA', src: 'backed/UTA.png', tall: true },
 ]
 
 export const BackedBy = () => (
@@ -15,7 +15,7 @@ export const BackedBy = () => (
         {investors.map((investor) => (
           <img
             key={investor.name}
-            src={investor.src}
+            src={`${import.meta.env.BASE_URL}${investor.src}`}
             alt={investor.name}
             className={`w-auto object-contain ${investor.tall ? 'h-14' : 'h-7'}`}
           />

@@ -16,13 +16,13 @@ export const WhatIsTix = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          { title: "Liquidity & Yield", desc: "Venues turn future ticket sales into capital, without giving up ticketing rights.", img: "/liquidity_b.png" },
-          { title: "Fraud-Proof", desc: "Fans enjoy fair prices with tickets that are always authentic, validated across markets.", img: "/fraud-proof_a.png" },
-          { title: "Programmable", desc: "Smart contracts turn static tickets into programmable real-world assets.", img: "/programmable_b.png" }
+          { title: "Liquidity & Yield", desc: "Venues turn future ticket sales into capital, without giving up ticketing rights.", img: "liquidity_b.png" },
+          { title: "Fraud-Proof", desc: "Fans enjoy fair prices with tickets that are always authentic, validated across markets.", img: "fraud-proof_a.png" },
+          { title: "Programmable", desc: "Smart contracts turn static tickets into programmable real-world assets.", img: "programmable_b.png" }
         ].map((item, i) => (
           <div key={i} className="group cursor-default">
             <div className="aspect-[4/3] w-full rounded-xl overflow-hidden border border-white/30 bg-transparent mb-6 relative flex items-center justify-center">
-              <img src={item.img} alt={item.title} className="h-full w-auto object-contain opacity-100 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700" />
+              <img src={`${import.meta.env.BASE_URL}${item.img}`} alt={item.title} className="h-full w-auto object-contain opacity-100 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700" />
             </div>
             <h3 className="serif font-thin text-4xl text-white mb-2 group-hover:text-blue-200 transition-colors">{item.title}</h3>
             <p className="text-white/70 text-md">{item.desc}</p>

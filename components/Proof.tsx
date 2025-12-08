@@ -92,7 +92,7 @@ export const Proof = () => (
             }}
           >
             <img
-              src={image.src}
+              src={`${import.meta.env.BASE_URL}${image.src}`}
               alt={`Featured artist ${index + 1}`}
               className="w-full h-full object-cover"
               loading="lazy"
@@ -111,7 +111,7 @@ export const Proof = () => (
               style={getImageStyles(image.borderRadius)}
             >
               <img
-                src={image.src}
+                src={`${import.meta.env.BASE_URL}${image.src}`}
                 alt={`Featured artist ${index + 1}`}
                 className="w-full h-full object-cover"
                 loading="lazy"

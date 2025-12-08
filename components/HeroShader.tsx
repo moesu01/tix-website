@@ -233,7 +233,7 @@ const glowFilterStyle: React.CSSProperties = {
   `,
 }
 
-const svgContainerStyle: React.CSSProperties = {
+const getSvgContainerStyle = (): React.CSSProperties => ({
   background: `
     radial-gradient(
       80% 380% at 10% 32%,
@@ -246,15 +246,15 @@ const svgContainerStyle: React.CSSProperties = {
     ),
     #FFFFFF
   `,
-  WebkitMaskImage: 'url(/tix.svg)',
+  WebkitMaskImage: `url(${import.meta.env.BASE_URL}tix.svg)`,
   WebkitMaskRepeat: 'no-repeat',
   WebkitMaskPosition: 'center',
   WebkitMaskSize: 'contain',
-  maskImage: 'url(/tix.svg)',
+  maskImage: `url(${import.meta.env.BASE_URL}tix.svg)`,
   maskRepeat: 'no-repeat',
   maskPosition: 'center',
   maskSize: 'contain',
-}
+})
 
 export const HeroShader: React.FC<ShaderControlProps & { className?: string }> = ({ className, ...props }) => {
   return (
@@ -281,7 +281,7 @@ export const HeroShader: React.FC<ShaderControlProps & { className?: string }> =
           {/* SVG container - applies background gradient as fill via mask */}
           <div 
             className="w-full h-full"
-            style={svgContainerStyle}
+            style={getSvgContainerStyle()}
             aria-label="TIX Logo"
             role="img"
           />

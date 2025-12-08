@@ -106,7 +106,7 @@ body {
 }
 
 h1, h2, h3, h4, .serif {
-  font-family: 'PP Editorial New', 'Georgia', 'Times New Roman', serif;
+  font-family: 'PP Editorial New', monospace, 'Times New Roman', serif;
 }
 
 h1, h2 {

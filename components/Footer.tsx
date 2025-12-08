@@ -7,12 +7,12 @@ export const Footer = React.forwardRef<HTMLElement>((_, ref) => (
       <div className="flex justify-between items-center mb-8">
         <div className="flex items-center gap-2">
           <img 
-            src="/tix_symbol.png" 
+            src={`${import.meta.env.BASE_URL}tix_symbol.png`} 
             alt="Tix Logo" 
             className="h-8 w-auto"
           />
           <img 
-            src="/tix_word.svg" 
+            src={`${import.meta.env.BASE_URL}tix_word.svg`} 
             alt="TIX" 
             className="h-8 w-auto"
           />
