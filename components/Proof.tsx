@@ -12,37 +12,37 @@ interface ArtistImage {
 
 const artistImages: ArtistImage[] = [
   {
-    src: '/artists/artist_1.png',
+    src: 'artists/artist_1.png',
     desktopStyle: { left: '0', top: '80px' },
     borderRadius: 40,
     zIndex: 10,
   },
   {
-    src: '/artists/artist_2.png',
+    src: 'artists/artist_2.png',
     desktopStyle: { left: '140px', top: '0' },
     borderRadius: 40,
     zIndex: 20,
   },
   {
-    src: '/artists/artist_3.png',
+    src: 'artists/artist_3.png',
     desktopStyle: { right: '0', top: '80px' },
     borderRadius: 100,
     zIndex: 15,
   },
   {
-    src: '/artists/artist_4.png',
+    src: 'artists/artist_4.png',
     desktopStyle: { left: '60px', top: '210px' },
     borderRadius: 100,
     zIndex: 25,
   },
   {
-    src: '/artists/artist_5.png',
+    src: 'artists/artist_5.png',
     desktopStyle: { left: '200px', top: '330px' },
     borderRadius: 40,
     zIndex: 10,
   },
   {
-    src: '/artists/artist_6.png',
+    src: 'artists/artist_6.png',
     desktopStyle: { right: '40px', top: '230px' },
     borderRadius: 40,
     zIndex: 15,
