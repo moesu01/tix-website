@@ -1,4 +1,6 @@
 import React from 'react'
+import { FaXTwitter } from 'react-icons/fa6'
+import { TbBrandTelegram } from 'react-icons/tb'
 
 export const Footer = React.forwardRef<HTMLElement>((_, ref) => (
   <footer ref={ref} className="py-12 border-t border-white/10">
@@ -16,6 +18,28 @@ export const Footer = React.forwardRef<HTMLElement>((_, ref) => (
             alt="TIX" 
             className="h-8 w-auto"
           />
+        </div>
+        
+        {/* Social icons */}
+        <div className="flex items-center gap-5">
+          <a 
+            href="#" 
+            className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
+            aria-label="Follow on X"
+            tabIndex={0}
+          >
+            <FaXTwitter size={18} />
+            <span>Follow on X</span>
+          </a>
+          <a 
+            href="#" 
+            className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
+            aria-label="Join Telegram"
+            tabIndex={0}
+          >
+            <TbBrandTelegram size={18} />
+            <span>Join Telegram</span>
+          </a>
         </div>
         
         <div className="relative">

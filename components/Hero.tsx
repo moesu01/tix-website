@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { HeroShader } from './HeroShader'
 import { LuGlobe } from 'react-icons/lu'
 import { TbBrandTelegram } from 'react-icons/tb'
+import { FaXTwitter } from 'react-icons/fa6'
 
 interface HeroProps {
   speed: number
@@ -71,7 +72,7 @@ export const Hero = ({
         <div className="max-w-[1500px] mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
              <img 
-               src={`${import.meta.env.BASE_URL}tix_symbol.png`} 
+               src={`${import.meta.env.BASE_URL}tix.svg`} 
                alt="Tix Logo" 
                className="h-8 w-auto"
              />
@@ -82,47 +83,57 @@ export const Hero = ({
              />
           </div>
           
-          {/* CTA button - fades in from blur after scrolling past hero */}
-          <div className="relative h-10 flex items-center">
-            {/* Menu button - hidden for now, will be needed in future */}
-            {/* <button 
-              className={[
-                'absolute right-0 p-2 rounded-full',
-                'hover:bg-white/10',
-                isPastHero ? 'pointer-events-none' : ''
-              ].join(' ')}
-              style={{
-                opacity: isPastHero ? 0 : 1,
-                filter: isPastHero ? 'blur(4px)' : 'blur(0px)',
-                transition: 'opacity 500ms ease-out, filter 500ms ease-out',
-              }}
-              aria-label="Menu"
-              aria-hidden={isPastHero}
-              tabIndex={isPastHero ? -1 : 0}
-            >
-              <Menu className="w-6 h-6 text-white" />
-            </button> */}
-            
+          {/* Social icons and CTA */}
+          <div className="flex items-center">
+            {/* Social icons - always visible, slide left when CTA appears */}
             <div 
-              className={[
-                'absolute right-0 relative',
-                isPastHero ? '' : 'pointer-events-none'
-              ].join(' ')}
+              className="flex items-center gap-5"
+              style={{
+                transform: isPastHero ? 'translateX(0)' : 'translateX(0)',
+                transition: 'transform 500ms ease-out'
+              }}
+            >
+              <a 
+                href="#" 
+                className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
+                aria-label="Follow on X"
+                tabIndex={0}
+              >
+                <FaXTwitter size={18} />
+                <span>Follow on X</span>
+              </a>
+              <a 
+                href="#" 
+                className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
+                aria-label="Join Telegram"
+                tabIndex={0}
+              >
+                <TbBrandTelegram size={18} />
+                <span>Join Telegram</span>
+              </a>
+            </div>
+            
+            {/* CTA button - fades in from blur after scrolling past hero */}
+            <div 
+              className={isPastHero ? 'ml-6' : 'pointer-events-none w-0 overflow-hidden'}
               style={{
                 opacity: isPastHero ? 1 : 0,
                 filter: isPastHero ? 'blur(0px)' : 'blur(4px)',
-                transition: 'opacity 500ms ease-out, filter 500ms ease-out',
+                marginLeft: isPastHero ? '24px' : '0px',
+                transition: 'opacity 500ms ease-out, filter 500ms ease-out, margin-left 500ms ease-out',
               }}
             >
-              <div className="cta-glow" aria-hidden="true" />
-              <button 
-                className="cta-gradient px-4 py-2 text-sm font-semibold hover:opacity-90"
-                aria-label="Join Waitlist"
-                aria-hidden={!isPastHero}
-                tabIndex={isPastHero ? 0 : -1}
-              >
-                <span className="text-white/75">Join TGE Waitlist</span>
-              </button>
+              <div className="relative">
+                <div className="cta-glow" aria-hidden="true" />
+                <button 
+                  className="cta-gradient px-4 py-2 text-sm font-semibold hover:opacity-90 whitespace-nowrap"
+                  aria-label="Get Early Access"
+                  aria-hidden={!isPastHero}
+                  tabIndex={isPastHero ? 0 : -1}
+                >
+                  <span className="text-white/75">Get Early Access</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -163,7 +174,7 @@ export const Hero = ({
                 </div>
                 <a 
                   href="#" 
-                  className="px-6 py-3 text-sm font-semibold transition-all hover:opacity-90 flex items-center gap-2 border border-white/20 rounded-lg"
+                  className="px-3 py-3 text-sm font-semibold transition-transform duration-200 hover:scale-105 flex items-center gap-2 border border-white/20 rounded-lg"
                   aria-label="Learn about $TIX Token"
                 >
                   <TbBrandTelegram size={20} className="text-white/75" />
