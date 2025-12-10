@@ -1,7 +1,17 @@
 import React from 'react'
 
 export const WhatIsTix = () => (
+  
   <section className="py-24 bg-black relative">
+    
+      <div 
+        className="md:mb-48 mb-24 text-center rounded-4xl py-6 md:py-6 px-6 md:px-12 "
+      >
+        <h2 className="text-4xl md:text-5xl serif font-thin gradient-text-hero max-w-4xl mx-auto">
+        Traditional tickets are static barcodes. <br/><br/>TIX tickets are programmable assets with embedded royalties, resale rules, fraud prevention, and settlement that venues and artists control end-to-end.
+        </h2>
+      </div>
+     
     <div className="section-container">
       <div className="mb-16 text-center">
         <div className="w-16 h-16 mb-6 mx-auto">

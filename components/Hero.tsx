@@ -150,7 +150,7 @@ export const Hero = ({
                 The Standard <br /> for Tickets
               </h1>
               <p className="text-[18px] lg:text-[20px] font-light leading-[1.3] max-w-[300px] lg:max-w-[350px] mx-auto md:mx-0 gradient-text-body tracking-[0.01em] md:mb-12">
-                Live event ticketing, modernized through onchain infrastructure.
+              TIX: an on-chain ticketing standard with embedded royalties, pricing rules, validation, and liquidity.
               </p>
               <div className="flex flex-col md:flex-row gap-4 items-center justify-center md:justify-start">
                 <div className="relative">

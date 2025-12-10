@@ -23,9 +23,8 @@ export const TheIssue = () => (
              <h2 className="serif text-5xl md:text-7xl gradient-text-hero mb-6 md:mb-0">Ticketing companies <br className="hidden md:block" />are banks.</h2>
            </div>
            <div className="space-y-4 text-[16px] lg:text-[18px] font-light gradient-text-body leading-relaxed mt-auto md:max-w-md">
-             <p>Legacy ticketing companies control the capital that artists and venues need.</p>
-             <p>For decades, venues have relied on ticketing lenders to finance deposits, production costs, and advances, trading away control, fan data, and future revenue for upfront liquidity.</p>
-             <p>TIX changes that by separating and upgrading the financing and settlement rails underneath ticketing, giving both sides more choice, transparency, and leverage.</p>
+             <p>For decades, venues have been forced to trade away their ticketing rights to secure one thing: cash flow. Artist deposits, production costs, and tour guarantees require upfront capital. Ticketing companies step in as lenders, advancing money in exchange for multi-year, exclusive ticketing lock-ins.</p>
+             <p>TIX introduces a new financing layer: on-chain, transparent, venue-friendly capital powered by programmable tickets. Instead of borrowing from the ticketing platform, venues raise liquidity directly from the value of their own ticket inventory.</p>
            </div>
          </div>
 
