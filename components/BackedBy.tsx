@@ -1,10 +1,9 @@
 const investors = [
-  { name: 'a16z', src: 'backed/a16z.png', tall: false },
-  { name: 'Founders Fund', src: 'backed/founders fund.png', tall: true },
-  { name: 'Comcast Ventures', src: 'backed/comcast.png', tall: true },
+  { name: 'a16z', src: 'backed/a16zcrypto.svg', tall: true },
   { name: 'NBCUniversal', src: 'backed/nbcu.png', tall: false },
-  { name: 'CAA', src: 'backed/caa.png', tall: false },
-  { name: 'UTA', src: 'backed/UTA.png', tall: true },
+  { name: 'Comcast Ventures', src: 'backed/comcast_ventures.png', tall: true },
+  { name: 'Founders Fund', src: 'backed/finality.svg', tall: false },
+  { name: 'CAA', src: 'backed/ambush.png', tall: false },
 ]
 
 export const BackedBy = () => (

@@ -145,9 +145,9 @@ export const Hero = ({
           id="hero-content"
           className="w-full md:w-[60%] md:min-w-[600px] h-full flex flex-col justify-center gap-12 px-6 md:px-12 lg:px-20 order-2 md:order-none relative z-20 -mt-[12vh] md:mt-0"
         >
-            <div id="hero-main" className="max-w-xl text-center md:text-left space-y-5 md:space-y-8 mx-auto md:mx-0">
-              <h1 className="serif text-6xl md:text-7xl lg:text-8xl leading-[0.9] gradient-text-hero pt-2 overflow-visible">
-                The Standard <br /> for Tickets
+            <div id="hero-main" className=" text-center md:text-left space-y-5 md:space-y-8 mx-auto md:mx-0">
+              <h1 className="serif text-6xl md:text-6xl lg:text-7xl leading-[1.1] gradient-text-hero pt-2 overflow-visible">
+                Tickets that behave like digital assets
               </h1>
               <p className="text-[18px] lg:text-[20px] font-light leading-[1.3] max-w-[300px] lg:max-w-[350px] mx-auto md:mx-0 gradient-text-body tracking-[0.01em] md:mb-12">
               TIX: an on-chain ticketing standard with embedded royalties, pricing rules, validation, and liquidity.
