@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { HeroShader } from './HeroShader'
-import { Menu } from 'lucide-react'
+import { LuGlobe } from 'react-icons/lu'
+import { TbBrandTelegram } from 'react-icons/tb'
 
 interface HeroProps {
   speed: number
@@ -147,22 +148,31 @@ export const Hero = ({
         >
             <div id="hero-main" className="max-w-xl text-center md:text-left space-y-5 md:space-y-8 mx-auto md:mx-0">
               <h1 className="serif text-6xl md:text-7xl lg:text-8xl leading-[0.9] gradient-text-hero pt-2 overflow-visible">
-                The Standard <br /> for Tickets
+              The Standard <br /> for Tickets
               </h1>
               <p className="text-[18px] lg:text-[20px] font-light leading-[1.3] max-w-[300px] lg:max-w-[350px] mx-auto md:mx-0 gradient-text-body tracking-[0.01em] md:mb-12">
-              TIX: an on-chain ticketing standard with embedded royalties, pricing rules, validation, and liquidity.
+              A Ticket Standard that turns tickets into capital through $TIX. 
               </p>
-              <div className="flex flex-col md:flex-row gap-4 items-center justify-center md:justify-start">
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start">
                 <div className="relative">
                   <div className="cta-glow" aria-hidden="true" />
-                  <button className="cta-gradient px-6 py-3 font-semibold transition-all hover:opacity-90">
-                    <span className="text-white/75">Join TGE Waitlist</span>
+                  <button className="cta-gradient px-6 py-3 text-sm font-semibold transition-all hover:opacity-90 flex items-center gap-2 relative z-10">
+                    <LuGlobe size={20} className="text-white/75 relative z-10" />
+                    <span className="text-white/75">Get Early Access</span>
                   </button>
                 </div>
+                <a 
+                  href="#" 
+                  className="px-6 py-3 text-sm font-semibold transition-all hover:opacity-90 flex items-center gap-2 border border-white/20 rounded-lg"
+                  aria-label="Learn about $TIX Token"
+                >
+                  <TbBrandTelegram size={20} className="text-white/75" />
+                  <span className="text-white/75">Learn about $TIX Token</span>
+                </a>
               </div>
             </div>
             <div id="hero-social-proof" className="text-xs text-white/50 leading-[1.6] uppercase tracking-widest text-center md:text-left max-w-xl mx-auto md:mx-0">
-              <p className="mb-3">Built by and for builders from:</p>
+              <p className="mb-3">Built by builders from and for:</p>
               <div className="flex items-center justify-center md:justify-start gap-6">
                 <img 
                   src={`${import.meta.env.BASE_URL}backed/live-nation.png`} 

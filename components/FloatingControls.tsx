@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings2, X } from 'lucide-react';
+import { LuSettings2, LuX } from 'react-icons/lu';
 import { QualityPreset, QUALITY_PRESETS } from '../types';
 
 interface FloatingControlsProps {
@@ -63,7 +63,7 @@ export const FloatingControls: React.FC<FloatingControlsProps> = ({
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 z-50 bg-white/10 backdrop-blur-md border border-white/20 p-3 rounded-full text-white hover:bg-white/20 transition-all shadow-lg"
       >
-        <Settings2 size={24} />
+        <LuSettings2 size={24} />
       </button>
     );
   }
@@ -72,14 +72,14 @@ export const FloatingControls: React.FC<FloatingControlsProps> = ({
     <div className="fixed bottom-6 right-6 z-50 w-80 bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl text-white max-h-[80vh] overflow-y-auto custom-scrollbar">
       <div className="flex justify-between items-center mb-6 sticky top-0 bg-black/0 backdrop-blur-sm z-10">
         <h3 className="text-sm font-semibold tracking-wider text-white/90 flex items-center gap-2">
-          <Settings2 size={16} />
+          <LuSettings2 size={16} />
           SHADER CONFIG
         </h3>
         <button
           onClick={() => setIsOpen(false)}
           className="text-white/50 hover:text-white transition-colors"
         >
-          <X size={18} />
+          <LuX size={18} />
         </button>
       </div>
 
