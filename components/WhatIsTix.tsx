@@ -26,12 +26,12 @@ export const WhatIsTix = () => (
             TIX introduces a new financing layer: <strong className="font-semibold">on-chain, transparent, venue-friendly capital</strong> powered by programmable tickets. Instead of borrowing from the ticketing platform, venues raise liquidity directly from the value of their own ticket inventory.
           </p>
           <h3 className="text-4xl font-thin mt-12 mb-4 gradient-text-hero">The Result:</h3>
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-4 md:gap-8 md:gap-12">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-4 md:gap-12">
             <div className="flex flex-row md:flex-col items-center gap-2 flex-1 md:basis-0">
               <img src={`${import.meta.env.BASE_URL}point.png`} alt="" aria-hidden="true" className="w-[40px] h-[40px]" />
               <span className='text-lg'>Venues retain their control.</span>
             </div>
-            <div className="flex flex-row md:flex-col items-center gap-2 flex-1 md:basis-0">
+            <div className="flex flex-row md:flex-col items-center md:px-12 gap-2 flex-1 md:basis-0 md:border-l md:border-r border-sky-200/50">
               <img src={`${import.meta.env.BASE_URL}point.png`} alt="" aria-hidden="true" className="w-[40px] h-[40px]" />
               <span className='text-lg'>Artists recover revenue and data.</span>
             </div>
