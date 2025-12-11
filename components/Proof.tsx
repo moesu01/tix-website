@@ -32,10 +32,10 @@ export const Proof = () => (
         </p>
         <button
           className="cta-gradient px-6 py-3 font-semibold transition-all hover:opacity-90"
-          aria-label="Get early access to TIX"
+          aria-label="Start building"
           tabIndex={0}
         >
-          <span className="text-white/75">Get Early Access</span>
+          <span className="text-white/75">Start Building</span>
         </button>
       </div>
 

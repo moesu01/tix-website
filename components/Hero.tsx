@@ -135,11 +135,11 @@ export const Hero = ({
               <div className="cta-glow" aria-hidden="true" />
               <button 
                 className="cta-gradient px-4 py-2 text-sm font-semibold hover:opacity-90 whitespace-nowrap"
-                aria-label="Get Early Access"
+                aria-label="Start Building"
                 aria-hidden={!isPastHero}
                 tabIndex={isPastHero ? 0 : -1}
               >
-                <span className="text-white/75">Get Early Access</span>
+                <span className="text-white/75">Start Building</span>
               </button>
             </div>
           </div>
@@ -206,10 +206,10 @@ export const Hero = ({
                   <div className="cta-glow" aria-hidden="true" />
                   <button 
                     className="cta-gradient w-full px-4 py-3 min-h-[48px] text-sm font-semibold flex items-center justify-center gap-2"
-                    aria-label="Get Early Access"
+                    aria-label="Start Building"
                   >
                     <LuGlobe size={20} className="text-white/75 relative z-10" />
-                    <span className="text-white/75">Get Early Access</span>
+                    <span className="text-white/75">Start Building</span>
                   </button>
                 </div>
               </nav>
@@ -248,14 +248,14 @@ export const Hero = ({
                   <div className="cta-glow" aria-hidden="true" />
                   <button className="cta-gradient px-6 py-3 text-sm font-semibold transition-all hover:opacity-90 flex items-center gap-2 relative z-10">
                     <LuGlobe size={20} className="text-white/75 relative z-10" />
-                    <span className="text-white/75">Get Early Access</span>
+                    <span className="text-white/75">Start Building</span>
                   </button>
                 </div>
                 <a 
                   href="https://x.com/tixprotocol"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 text-sm font-semibold transition-transform duration-200 hover:scale-105 flex items-center gap-2 border border-white/20 rounded-lg"
+                  className="px-6 py-3 text-sm font-semibold transition-transform duration-200 hover:scale-105 flex items-center gap-2 border border-white/20 rounded-[12px]"
                   aria-label="Follow us on X"
                 >
                   <FaXTwitter size={20} className="text-white/75" />
