@@ -1,4 +1,5 @@
 import React from 'react'
+import { LuBuilding2, LuMusic, LuHeart } from 'react-icons/lu'
 
 export const WhatIsTix = () => (
   
@@ -21,22 +22,32 @@ export const WhatIsTix = () => (
           className="w-full max-w-lg md:max-w-4xl mx-auto my-8"
         />
         
-        <div className="gradient-text-body max-w-3xl mx-auto space-y-6 max-w-xl">
-          <p>
+        <div className="gradient-text-body max-w-3xl mx-auto space-y-6">
+          <p className='max-w-2xl mx-auto'>
             TIX introduces a new financing layer: <strong className="font-semibold">on-chain, transparent, venue-friendly capital</strong> powered by programmable tickets. Instead of borrowing from the ticketing platform, venues raise liquidity directly from the value of their own ticket inventory.
           </p>
-          <p><span className="font-medium">The result:</span><br/>
-            Venues keep control.<br />
-            Artists recover revenue and data.<br />
-            Fans stop paying the price for a broken financial model.
-          </p>
+          <h3 className="text-4xl font-thin mt-12 mb-4 gradient-text-hero">The Result:</h3>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+            <div className="flex flex-col items-center gap-2 flex-1 md:basis-0">
+              <LuBuilding2 className="w-6 h-6 text-blue-400" aria-hidden="true" />
+              <span className='text-lg'>Venues retain their control.</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 flex-1 md:basis-0">
+              <LuMusic className="w-6 h-6 text-purple-400" aria-hidden="true" />
+              <span className='text-lg'>Artists recover revenue and data.</span>
+            </div>
+            <div className="flex flex-col items-center gap-2 flex-1 md:basis-0">
+              <LuHeart className="w-6 h-6 text-pink-400" aria-hidden="true" />
+              <span className='text-lg'>Fans stop paying the price.</span>
+            </div>
+          </div>
         </div>
         
       </div>
      
     <div className="section-container">
       <div className="mb-6 text-center">
-        <h2 className="serif text-5xl md:text-6xl gradient-text-hero mb-0">For venues, artists, and fans.</h2>
+        <h2 className="serif text-5xl md:text-6xl gradient-text-hero mb-0">For Venues, Artists, and Fans.</h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
