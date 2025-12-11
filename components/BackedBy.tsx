@@ -3,7 +3,7 @@ const investors = [
   { name: 'NBCUniversal', src: 'backed/nbcu.png', tall: false },
   { name: 'Comcast Ventures', src: 'backed/comcast_ventures.png', tall: true },
   { name: 'Founders Fund', src: 'backed/finality.svg', tall: false },
-  { name: 'CAA', src: 'backed/ambush.png', tall: false },
+  // { name: 'CAA', src: 'backed/ambush.png', tall: false },
 ]
 
 export const BackedBy = () => (

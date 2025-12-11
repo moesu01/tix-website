@@ -69,71 +69,63 @@ export const Hero = ({
           pointerEvents: isFooterVisible ? 'none' : 'auto'
         }}
       >
-        <div className="max-w-[1500px] mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2">
-             <img 
-               src={`${import.meta.env.BASE_URL}tix.svg`} 
-               alt="Tix Logo" 
-               className="h-8 w-auto"
-             />
-             <img 
-               src={`${import.meta.env.BASE_URL}tix_word.svg`} 
-               alt="TIX" 
-               className="h-8 w-auto"
-             />
+        <div className="max-w-[1500px] mx-auto flex items-center relative">
+          {/* Left: Social Links */}
+          <div className="flex-1 flex items-center gap-5">
+            <a 
+              href="#" 
+              className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
+              aria-label="Follow on X"
+              tabIndex={0}
+            >
+              <FaXTwitter size={18} />
+              <span>Follow on X</span>
+            </a>
+            <a 
+              href="#" 
+              className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
+              aria-label="Join Telegram"
+              tabIndex={0}
+            >
+              <TbBrandTelegram size={18} />
+              <span>Join Telegram</span>
+            </a>
           </div>
-          
-          {/* Social icons and CTA */}
-          <div className="flex items-center">
-            {/* Social icons - always visible, slide left when CTA appears */}
-            <div 
-              className="flex items-center gap-5"
-              style={{
-                transform: isPastHero ? 'translateX(0)' : 'translateX(0)',
-                transition: 'transform 500ms ease-out'
-              }}
-            >
-              <a 
-                href="#" 
-                className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
-                aria-label="Follow on X"
-                tabIndex={0}
+
+          {/* Center: Logo */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+            <img 
+              src={`${import.meta.env.BASE_URL}tix.svg`} 
+              alt="Tix Logo" 
+              className="h-8 w-auto"
+            />
+            <img 
+              src={`${import.meta.env.BASE_URL}tix_word.svg`} 
+              alt="TIX" 
+              className="h-8 w-auto"
+            />
+          </div>
+
+          {/* Right: CTA button - fades in from blur after scrolling past hero */}
+          <div 
+            className="flex-1 flex justify-end"
+            style={{
+              opacity: isPastHero ? 1 : 0,
+              filter: isPastHero ? 'blur(0px)' : 'blur(4px)',
+              transition: 'opacity 500ms ease-out, filter 500ms ease-out',
+              pointerEvents: isPastHero ? 'auto' : 'none',
+            }}
+          >
+            <div className="relative">
+              <div className="cta-glow" aria-hidden="true" />
+              <button 
+                className="cta-gradient px-4 py-2 text-sm font-semibold hover:opacity-90 whitespace-nowrap"
+                aria-label="Get Early Access"
+                aria-hidden={!isPastHero}
+                tabIndex={isPastHero ? 0 : -1}
               >
-                <FaXTwitter size={18} />
-                <span>Follow on X</span>
-              </a>
-              <a 
-                href="#" 
-                className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
-                aria-label="Join Telegram"
-                tabIndex={0}
-              >
-                <TbBrandTelegram size={18} />
-                <span>Join Telegram</span>
-              </a>
-            </div>
-            
-            {/* CTA button - fades in from blur after scrolling past hero */}
-            <div 
-              className={isPastHero ? 'ml-6' : 'pointer-events-none w-0 overflow-hidden'}
-              style={{
-                opacity: isPastHero ? 1 : 0,
-                filter: isPastHero ? 'blur(0px)' : 'blur(4px)',
-                marginLeft: isPastHero ? '24px' : '0px',
-                transition: 'opacity 500ms ease-out, filter 500ms ease-out, margin-left 500ms ease-out',
-              }}
-            >
-              <div className="relative">
-                <div className="cta-glow" aria-hidden="true" />
-                <button 
-                  className="cta-gradient px-4 py-2 text-sm font-semibold hover:opacity-90 whitespace-nowrap"
-                  aria-label="Get Early Access"
-                  aria-hidden={!isPastHero}
-                  tabIndex={isPastHero ? 0 : -1}
-                >
-                  <span className="text-white/75">Get Early Access</span>
-                </button>
-              </div>
+                <span className="text-white/75">Get Early Access</span>
+              </button>
             </div>
           </div>
         </div>
@@ -143,28 +135,28 @@ export const Hero = ({
       <section 
         className={[
           // Layout
-          'relative flex flex-col md:block content-center',
+          'relative flex flex-col content-center',
           // Sizing
-          'w-full h-auto md:h-screen pb-12 md:pb-0',
-          'min-h-[600px] lg:max-h-[800px] max-w-[1500px]',
+          'w-full h-auto py-12',
+          'min-h-[600px] max-w-[1500px]',
           // Spacing
           'mx-auto',
         ].join(' ')}
       >
         
-        {/* Left Column: Content */}
+        {/* Content */}
         <div 
           id="hero-content"
-          className="w-full md:w-[60%] md:min-w-[600px] h-full flex flex-col justify-center gap-12 px-6 md:px-12 lg:px-20 order-2 md:order-none relative z-20 -mt-[12vh] md:mt-0"
+          className="w-full h-full flex flex-col justify-center gap-12 px-6 md:px-12 lg:px-20 order-2 relative z-20 -mt-[3vh]"
         >
-            <div id="hero-main" className="max-w-xl text-center md:text-left space-y-5 md:space-y-8 mx-auto md:mx-0">
+            <div id="hero-main" className="max-w-xl text-center space-y-4 mx-auto">
               <h1 className="serif text-6xl md:text-7xl lg:text-8xl leading-[0.9] gradient-text-hero pt-2 overflow-visible">
               The Standard <br /> for Tickets
               </h1>
-              <p className="text-[18px] lg:text-[20px] font-light leading-[1.3] max-w-[300px] lg:max-w-[350px] mx-auto md:mx-0 gradient-text-body tracking-[0.01em] md:mb-12">
+              <p className="text-[18px] lg:text-[20px] font-light leading-[1.3] max-w-[300px] lg:max-w-[350px] mx-auto gradient-text-body tracking-[0.01em] md:mb-8">
               A Ticket Standard that turns tickets into capital through $TIX. 
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start">
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
                 <div className="relative">
                   <div className="cta-glow" aria-hidden="true" />
                   <button className="cta-gradient px-6 py-3 text-sm font-semibold transition-all hover:opacity-90 flex items-center gap-2 relative z-10">
@@ -182,9 +174,9 @@ export const Hero = ({
                 </a>
               </div>
             </div>
-            <div id="hero-social-proof" className="text-xs text-white/50 leading-[1.6] uppercase tracking-widest text-center md:text-left max-w-xl mx-auto md:mx-0">
+            <div id="hero-social-proof" className="text-xs text-white/50 leading-[1.6] uppercase tracking-widest text-center max-w-xl mx-auto">
               <p className="mb-3">Built by builders from and for:</p>
-              <div className="flex items-center justify-center md:justify-start gap-6">
+              <div className="flex items-center justify-center gap-6">
                 <img 
                   src={`${import.meta.env.BASE_URL}backed/live-nation.png`} 
                   alt="Live Nation" 
@@ -204,20 +196,18 @@ export const Hero = ({
             </div>
         </div>
 
-        {/* Right Column: Shader */}
-        {/* Absolutely positioned on desktop, right-aligned and vertically centered */}
+        {/* Shader */}
         <div 
           className={[
-            // Base layout - 120vw on mobile, centered with negative margin, pulled up
-            'relative w-[120vw] -ml-[10vw] aspect-square max-lg:max-h-[800px]',
-            // Desktop reset
-            'md:w-full md:h-full md:ml-0 md:mt-0 md:aspect-auto',
-            'order-1 md:order-none',
-            // Desktop positioning
-            'md:absolute md:-right-0 md:translate-x-1/3 md:top-1/2 md:-translate-y-1/2 lg:-right-0 lg:translate-x-1/5',
-            // Z-index
+            // Mobile (< 640px) - Full bleed immersive
+            'relative w-[120vw] -ml-[10vw] aspect-square',
+            // Small tablets (640-768px) - Scaled down to prevent balloon
+            'sm:w-[50vh] sm:max-w-[400px] sm:ml-auto sm:mr-auto',
+            // Desktop (768px+) - Original sizing
+            'md:w-[40vh] md:max-w-[500px]',
+            'order-1',
             'z-10',
-            
+            'overflow-visible',
           ].join(' ')}
         >
           <HeroShader 
@@ -235,11 +225,8 @@ export const Hero = ({
             saturation={saturation}
             dpr={dpr}
             shadowCount={shadowCount}
-            className="w-full h-full absolute inset-"
+            className="w-full h-full absolute inset-0"
           />
-          
-          {/* Desktop gradient overlay - Fade left edge more to blend smoothly with overlapping text */}
-          {/* Desktop gradient overlay - Fade top/bottom slightly to match section edges */}
         </div>
 
       </section>

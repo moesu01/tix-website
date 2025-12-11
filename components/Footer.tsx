@@ -41,17 +41,6 @@ export const Footer = React.forwardRef<HTMLElement>((_, ref) => (
             <span>Join Telegram</span>
           </a>
         </div>
-        
-        <div className="relative">
-          <div className="cta-glow" aria-hidden="true" />
-          <button 
-            className="cta-gradient px-4 py-2 text-sm font-semibold hover:opacity-90"
-            aria-label="Join Waitlist"
-            tabIndex={0}
-          >
-            <span className="text-white/75">Join TGE Waitlist</span>
-          </button>
-        </div>
       </div>
 
       {/* Copyright line */}

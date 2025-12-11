@@ -52,9 +52,9 @@ const App: React.FC = () => {
   const [interactionMax, setInteractionMax] = useState(4.2)
   
   // Color adjustment states
-  const [brightness, setBrightness] = useState(0.7)
-  const [contrast, setContrast] = useState(1.0)
-  const [saturation, setSaturation] = useState(1.15)
+  const [brightness, setBrightness] = useState(0.5)
+  const [contrast, setContrast] = useState(1.5)
+  const [saturation, setSaturation] = useState(1.25)
 
   // Update quality-dependent values when preset changes
   useEffect(() => {

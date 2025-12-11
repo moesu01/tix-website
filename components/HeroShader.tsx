@@ -159,7 +159,7 @@ class TixShaderMaterial extends ShaderMaterial {
         uDistortion: { value: 0.0 },
         uInteraction: { value: 0.0 },
         uIterations: { value: 10.0 },
-        uFbmIterations: { value: 4.0 },
+        uFbmIterations: { value: 1.0 },
         uInteractionMin: { value: 0.0 },
         uInteractionMax: { value: 3.0 },
         uBrightness: { value: 1.0 },
@@ -285,9 +285,9 @@ export const HeroShader: React.FC<ShaderControlProps & { className?: string }> =
       {/* Logo overlay - centered absolutely */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         {/* Glow wrapper - applies drop-shadow filter that follows the SVG shape */}
-        {/* SVG ratio is 161:175 (w:h), 120px on mobile, 180px on desktop */}
+        {/* SVG ratio is 161:175 (w:h), max 100px height */}
         <div 
-          className="h-[120px] w-[110px] md:h-[180px] md:w-[165px]"
+          className="h-[100px] w-[92px]"
           style={getGlowFilterStyle(shadowCount)}
         >
           {/* SVG container - applies background gradient as fill via mask */}
