@@ -252,32 +252,34 @@ export const Hero = ({
                   </button>
                 </div>
                 <a 
-                  href="#" 
-                  className="px-3 py-3 text-sm font-semibold transition-transform duration-200 hover:scale-105 flex items-center gap-2 border border-white/20 rounded-lg"
-                  aria-label="Learn about $TIX Token"
+                  href="https://x.com/tixprotocol"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 text-sm font-semibold transition-transform duration-200 hover:scale-105 flex items-center gap-2 border border-white/20 rounded-lg"
+                  aria-label="Follow us on X"
                 >
-                  <TbBrandTelegram size={20} className="text-white/75" />
-                  <span className="text-white/75">Learn about $TIX Token</span>
+                  <FaXTwitter size={20} className="text-white/75" />
+                  <span className="text-white/75">Follow us on X</span>
                 </a>
               </div>
             </div>
-            <div id="hero-social-proof" className="text-xs text-white/50 leading-[1.6] uppercase tracking-widest text-center max-w-xl mx-auto">
+            <div id="hero-social-proof" className="text-s text-white/50 leading-[1.6] uppercase tracking-widest text-center max-w-xl mx-auto">
               <p className="mb-3">Built by builders from and for:</p>
-              <div className="flex items-center justify-center gap-6">
+              <div className="flex items-center justify-center gap-6 md:gap-8">
                 <img 
                   src={`${import.meta.env.BASE_URL}backed/live-nation.png`} 
                   alt="Live Nation" 
-                  className="h-4 w-auto opacity-50"
+                  className="h-5 w-auto opacity-50"
                 />
                 <img 
                   src={`${import.meta.env.BASE_URL}backed/tm.svg`} 
                   alt="Ticketmaster" 
-                  className="h-4 w-auto opacity-50"
+                  className="h-5 w-auto opacity-50"
                 />
                 <img 
                   src={`${import.meta.env.BASE_URL}backed/vivid seats.png`} 
                   alt="Vivid Seats" 
-                  className="h-4 w-auto opacity-50"
+                  className="h-5 w-auto opacity-50"
                 />
               </div>
             </div>
