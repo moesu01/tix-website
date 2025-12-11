@@ -34,7 +34,7 @@ export const Footer = React.forwardRef<HTMLElement>((_, ref) => (
           </a>
           <a 
             href="#" 
-            className="flex items-center justify-center w-11 h-11 text-white/75 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200"
+            className="hidden flex items-center justify-center w-11 h-11 text-white/75 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200"
             aria-label="Join Telegram"
             tabIndex={0}
           >

@@ -98,7 +98,7 @@ export const Hero = ({
             </a>
             <a 
               href="#" 
-              className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
+              className="hidden flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
               aria-label="Join Telegram"
               tabIndex={0}
             >
@@ -133,14 +133,17 @@ export const Hero = ({
           >
             <div className="relative">
               <div className="cta-glow" aria-hidden="true" />
-              <button 
-                className="cta-gradient px-4 py-2 text-sm font-semibold hover:opacity-90 whitespace-nowrap"
+              <a 
+                href="https://kydlabs.typeform.com/to/qU93XdPr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-gradient px-4 py-2 text-sm font-semibold hover:opacity-90 whitespace-nowrap inline-block"
                 aria-label="Start Building"
                 aria-hidden={!isPastHero}
                 tabIndex={isPastHero ? 0 : -1}
               >
                 <span className="text-white/75">Start Building</span>
-              </button>
+              </a>
             </div>
           </div>
 
@@ -194,7 +197,7 @@ export const Hero = ({
                 </a>
                 <a 
                   href="#" 
-                  className="flex items-center gap-3 px-4 py-3 min-h-[48px] text-white/75 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                  className="hidden flex items-center gap-3 px-4 py-3 min-h-[48px] text-white/75 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                   aria-label="Join Telegram"
                   tabIndex={0}
                 >
@@ -204,13 +207,16 @@ export const Hero = ({
                 {/* CTA Button */}
                 <div className="mt-4 relative">
                   <div className="cta-glow" aria-hidden="true" />
-                  <button 
+                  <a 
+                    href="https://kydlabs.typeform.com/to/qU93XdPr"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="cta-gradient w-full px-4 py-3 min-h-[48px] text-sm font-semibold flex items-center justify-center gap-2"
                     aria-label="Start Building"
                   >
                     <LuGlobe size={20} className="text-white/75 relative z-10" />
                     <span className="text-white/75">Start Building</span>
-                  </button>
+                  </a>
                 </div>
               </nav>
             </motion.div>
@@ -246,10 +252,15 @@ export const Hero = ({
               <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
                 <div className="relative">
                   <div className="cta-glow" aria-hidden="true" />
-                  <button className="cta-gradient px-6 py-3 text-sm font-semibold transition-all hover:opacity-90 flex items-center gap-2 relative z-10">
+                  <a 
+                    href="https://kydlabs.typeform.com/to/qU93XdPr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-gradient px-6 py-3 text-sm font-semibold transition-all hover:opacity-90 flex items-center gap-2 relative z-10 whitespace-nowrap"
+                  >
                     <LuGlobe size={20} className="text-white/75 relative z-10" />
                     <span className="text-white/75">Start Building</span>
-                  </button>
+                  </a>
                 </div>
                 <a 
                   href="https://x.com/tixprotocol"

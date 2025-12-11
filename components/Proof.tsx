@@ -30,13 +30,16 @@ export const Proof = () => (
         <p className="gradient-text-body max-w-md text-lg leading-relaxed mb-8">
           TIX powers the next generation of live shows, from sold-out arenas to emerging tours.
         </p>
-        <button
-          className="cta-gradient px-6 py-3 font-semibold transition-all hover:opacity-90"
+        <a
+          href="https://kydlabs.typeform.com/to/qU93XdPr"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cta-gradient px-6 py-3 font-semibold transition-all hover:opacity-90 inline-block"
           aria-label="Start building"
           tabIndex={0}
         >
           <span className="text-white/75">Start Building</span>
-        </button>
+        </a>
       </div>
 
       {/* Artist Images Grid - Desktop */}
