@@ -51,9 +51,9 @@ const App: React.FC = () => {
   const [interactionMin, setInteractionMin] = useState(0.0)
   const [interactionMax, setInteractionMax] = useState(4.2)
   
-  // Color adjustment states
+  // Color adjustment states - mobile gets lower contrast
   const [brightness, setBrightness] = useState(0.5)
-  const [contrast, setContrast] = useState(1.5)
+  const [contrast, setContrast] = useState(() => detectMobile() ? 1.2 : 1.5)
   const [saturation, setSaturation] = useState(1.25)
 
   // Update quality-dependent values when preset changes
@@ -124,7 +124,7 @@ const App: React.FC = () => {
       if (window.innerWidth < 768) {
         const scrollNorm = Math.min(window.scrollY / (window.innerHeight * 0.8), 1)
         pendingUpdate.current.interaction = scrollNorm * 1.5
-        pendingUpdate.current.glow = 1.0 + scrollNorm * 1.8
+        pendingUpdate.current.glow = 1.5 + scrollNorm * 1.8
         
         scheduleUpdate()
       }

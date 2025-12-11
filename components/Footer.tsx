@@ -21,24 +21,24 @@ export const Footer = React.forwardRef<HTMLElement>((_, ref) => (
         </div>
         
         {/* Social icons */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-1">
           <a 
-            href="#" 
-            className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
+            href="https://x.com/tixprotocol"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-11 h-11 text-white/75 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200"
             aria-label="Follow on X"
             tabIndex={0}
           >
-            <FaXTwitter size={18} />
-            <span>Follow on X</span>
+            <FaXTwitter size={20} />
           </a>
           <a 
             href="#" 
-            className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
+            className="flex items-center justify-center w-11 h-11 text-white/75 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200"
             aria-label="Join Telegram"
             tabIndex={0}
           >
-            <TbBrandTelegram size={18} />
-            <span>Join Telegram</span>
+            <TbBrandTelegram size={20} />
           </a>
         </div>
       </div>

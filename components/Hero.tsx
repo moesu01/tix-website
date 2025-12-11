@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { HeroShader } from './HeroShader'
 import { LuGlobe } from 'react-icons/lu'
 import { TbBrandTelegram } from 'react-icons/tb'
 import { FaXTwitter } from 'react-icons/fa6'
+import { HiOutlineMenuAlt3, HiX } from 'react-icons/hi'
 
 interface HeroProps {
   speed: number
@@ -40,6 +42,7 @@ export const Hero = ({
   isFooterVisible,
 }: HeroProps) => {
   const [isPastHero, setIsPastHero] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,6 +60,16 @@ export const Hero = ({
     }
   }, [])
 
+  // Body scroll lock when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [isMenuOpen])
+
   return (
     <>
       {/* Navigation */}
@@ -70,10 +83,12 @@ export const Hero = ({
         }}
       >
         <div className="max-w-[1500px] mx-auto flex items-center relative">
-          {/* Left: Social Links */}
-          <div className="flex-1 flex items-center gap-5">
+          {/* Left: Social Links (hidden on mobile) */}
+          <div className="flex-1 hidden md:flex items-center gap-5">
             <a 
-              href="#" 
+              href="https://x.com/tixprotocol"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 text-[14px] text-white/75 hover:text-white transition-colors duration-200"
               aria-label="Follow on X"
               tabIndex={0}
@@ -106,9 +121,9 @@ export const Hero = ({
             />
           </div>
 
-          {/* Right: CTA button - fades in from blur after scrolling past hero */}
+          {/* Right: CTA button - fades in from blur after scrolling past hero (hidden on mobile) */}
           <div 
-            className="flex-1 flex justify-end"
+            className="flex-1 hidden md:flex justify-end"
             style={{
               opacity: isPastHero ? 1 : 0,
               filter: isPastHero ? 'blur(0px)' : 'blur(4px)',
@@ -128,8 +143,80 @@ export const Hero = ({
               </button>
             </div>
           </div>
+
+          {/* Mobile Menu Button (right side) */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden flex items-center justify-center w-11 h-11 -mr-2 ml-auto text-white/75 hover:text-white transition-colors"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <HiX size={24} /> : <HiOutlineMenuAlt3 size={24} />}
+          </button>
         </div>
       </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-30 md:hidden"
+          >
+            {/* Backdrop */}
+            <div 
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setIsMenuOpen(false)}
+              aria-hidden="true"
+            />
+            {/* Menu Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              className="absolute right-0 top-0 h-full w-72 bg-black/95 border-l border-white/10 p-6 pt-20"
+            >
+              <nav className="flex flex-col gap-2" aria-label="Mobile navigation">
+                {/* Social Links - 48px min touch target */}
+                <a 
+                  href="https://x.com/tixprotocol"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-4 py-3 min-h-[48px] text-white/75 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                  aria-label="Follow on X"
+                  tabIndex={0}
+                >
+                  <FaXTwitter size={20} />
+                  <span>Follow on X</span>
+                </a>
+                <a 
+                  href="#" 
+                  className="flex items-center gap-3 px-4 py-3 min-h-[48px] text-white/75 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                  aria-label="Join Telegram"
+                  tabIndex={0}
+                >
+                  <TbBrandTelegram size={20} />
+                  <span>Join Telegram</span>
+                </a>
+                {/* CTA Button */}
+                <div className="mt-4 relative">
+                  <div className="cta-glow" aria-hidden="true" />
+                  <button 
+                    className="cta-gradient w-full px-4 py-3 min-h-[48px] text-sm font-semibold flex items-center justify-center gap-2"
+                    aria-label="Get Early Access"
+                  >
+                    <LuGlobe size={20} className="text-white/75 relative z-10" />
+                    <span className="text-white/75">Get Early Access</span>
+                  </button>
+                </div>
+              </nav>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section 
